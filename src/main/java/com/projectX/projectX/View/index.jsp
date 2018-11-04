@@ -9,7 +9,7 @@
     Imprezki:
     <ul>
         <li>
-            ${party}
+
         </li>
     </ul>
     <button onclick="window.location.href='add.jsp'">Dodaj imprezę</button>

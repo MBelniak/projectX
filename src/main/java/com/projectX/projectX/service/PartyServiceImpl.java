@@ -10,16 +10,20 @@ import java.util.Date;
 @Service
 public class PartyServiceImpl implements PartyService {
 
+    private final PartyRepository partyRepository;
+
     @Autowired
-    private PartyRepository partyRepository;
+    public PartyServiceImpl(PartyRepository partyRepository) {
+        this.partyRepository = partyRepository;
+    }
 
     @Override
     public Iterable<Party> getAll() {
-        return null;
+        return partyRepository.findAll();
     }
 
     @Override
     public Party create(String name, String description, Date date) {
-        return null;
+        return partyRepository.save(new Party(name, description, date));
     }
 }
