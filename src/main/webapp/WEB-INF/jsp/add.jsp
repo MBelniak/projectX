@@ -3,8 +3,8 @@
 
 <html lang="pl">
 <head>
-    <link rel="stylesheet" href="add.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/add.css" type="text/css"/>
 </head>
 <body>
-
+Hello
 </body>
