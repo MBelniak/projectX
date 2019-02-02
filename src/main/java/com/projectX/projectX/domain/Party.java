@@ -15,12 +15,14 @@ public class Party {
     private String name;
     private String description;
     private Date date;
+    private boolean partyPrivate;
 
     protected Party() {}
 
-    public Party(String name, String description, Date date) {
+    public Party(String name, String description, Date date, boolean partyPrivate) {
         this.name = name;
         this.description = description;
         this.date = date;
+        this.partyPrivate = partyPrivate;
     }
 }

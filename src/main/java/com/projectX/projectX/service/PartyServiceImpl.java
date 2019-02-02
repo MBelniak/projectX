@@ -23,7 +23,7 @@ public class PartyServiceImpl implements PartyService {
     }
 
     @Override
-    public Party create(String name, String description, Date date) {
-        return partyRepository.save(new Party(name, description, date));
+    public Party create(String name, String description, Date date, boolean partyPrivate) {
+        return partyRepository.save(new Party(name, description, date, partyPrivate));
     }
 }

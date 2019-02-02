@@ -6,5 +6,5 @@ import java.util.Date;
 
 public interface PartyService {
     Iterable<Party> getAll();
-    Party create(String name, String description, Date date);
+    Party create(String name, String description, Date date, boolean partyPrivate);
 }

@@ -5,9 +5,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="<c:url value="/static/index.css" />"/>
+    <link rel="stylesheet" href="<c:url value="/resources/static/index.css" />"/>
 </head>
 <body>
-jhgjfdgsgdhfdjglh
+<p>Hello</p>
    </body>
 </html>

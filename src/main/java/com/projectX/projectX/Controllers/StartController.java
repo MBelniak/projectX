@@ -1,25 +1,17 @@
-package com.projectX.projectX;
+package com.projectX.projectX.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
 public class StartController {
 
-//    @Autowired
-//    private PartyService partyService;
-
-    @RequestMapping(value="/")
-    public String getIndex() {
-        return "index";
+    @RequestMapping(value="/add")
+    public ModelAndView getIndex() {
+        return new ModelAndView("add");
     }
-
-//    @RequestMapping("/parties")
-//    public Iterable<Party> getParties()
-//    {
-//        return partyService.getAll();
-//    }
 
 
 
