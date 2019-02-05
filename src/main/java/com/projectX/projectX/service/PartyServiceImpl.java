@@ -2,10 +2,12 @@ package com.projectX.projectX.service;
 
 import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.repository.PartyRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
-import java.util.Date;
+import java.util.List;
 
 @Service
 public class PartyServiceImpl implements PartyService {
@@ -18,12 +20,26 @@ public class PartyServiceImpl implements PartyService {
     }
 
     @Override
-    public Iterable<Party> getAll() {
-        return partyRepository.findAll();
+    public List<Party> getAll()
+    {
+        List<Party> parties = new ArrayList<>();
+        partyRepository.findAll().forEach(((ArrayList<Party>) parties)::add);
+        return parties;
     }
 
     @Override
-    public Party create(String name, String description, Date date, boolean partyPrivate) {
-        return partyRepository.save(new Party(name, description, date, partyPrivate));
+    public Party getParty(Long id)
+    {
+        return partyRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Party addParty(Party party) {
+        return partyRepository.save(party);
+    }
+
+    @Override
+    public Party updateParty(Party party, Long id) {
+        return partyRepository.save(party);
     }
 }
