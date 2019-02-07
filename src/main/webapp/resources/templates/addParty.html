@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <title>Add a party</title>
+    <script th:src="@{/js/addParty.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery-3.3.1.min.js}" type="text/javascript"></script>
+    <title>PARTY TIME</title>
 </head>
 <body>
-Give us some info about the party:
-    <input type="text" name="name"/>
-    <input type="text" name="description"/>
-    <input type="date" name="date"/>
-    <button value="wyślij"></button>
+    <section class="hero is-primary is-bold">
+       <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Add party
+                </h1>
+                <h2 class="subtitle">
+                    Give us some info about the party
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                <div>
+                    Name of the party:<br/>
+                    <textarea class="textarea"  id="name" rows="1" placeholder="e.g. My sweet 16!"></textarea><br/>
+                    Description:<br/>
+                    <textarea class="textarea" id="description" placeholder="e.g Let's celebrate the occasion!"></textarea><br/>
+                    Date:<br/>
+                    <input type="date" id="date"/><br/>
+                    City:<br/>
+                    <textarea class="textarea" id="city" placeholder="e.g. Warsaw" rows="1"></textarea><br/>
+                    Address:<br/>
+                    <textarea class="textarea" id="address" placeholder="e.g. Waszyngtona 2/12" rows="1"></textarea><br/>
+                <button class="button is-primary" id="send_button">Wyślij</button>
+                </div>
+            </div>
+            </div>
+            <div class="level-right">
+
+            </div>
+        </nav>
+    </section>
 </body>
 </html>

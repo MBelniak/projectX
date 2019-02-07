@@ -1,7 +1,12 @@
 package com.projectX.projectX.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -14,13 +19,23 @@ public class Party implements Serializable {
     private String description;
     @Temporal(TemporalType.DATE)
     private Date date;
+    private String city;
+    private String address;
 
-    protected Party() {}
+    public Party() {}
 
-    public Party(String name, String description, Date date) {
+    @JsonCreator
+    public Party(@JsonProperty("name") String name,@JsonProperty("description") String description,@JsonProperty("date") String date,
+                 @JsonProperty("city") String city,@JsonProperty("address") String address) {
         this.name = name;
         this.description = description;
-        this.date = date;
+        try {
+            this.date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            this.date = null;
+        }
+        this.city = city;
+        this.address = address;
     }
 
     public Long getId() {
@@ -53,5 +68,21 @@ public class Party implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
