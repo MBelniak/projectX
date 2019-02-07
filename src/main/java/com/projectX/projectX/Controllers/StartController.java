@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class StartController {
 
     @RequestMapping(value="/new_party")
-    public ModelAndView getIndex() {
-        return new ModelAndView("addParty");
+    public String getIndex() {
+        return "addParty";
     }
     @RequestMapping(value = "/search_party")
-    public ModelAndView getParties()
+    public String getParties()
     {
-        return new ModelAndView("parties");
+        return "parties";
     }
 
 
