@@ -19,7 +19,7 @@ function showParty() {
     document.getElementById("party_name").innerHTML+=response["name"];
     document.getElementById("description").innerHTML+=response["description"];
     document.getElementById("date").innerHTML+=response["date"];
-    document.getElementById("address").innerHTML+=response["address"];
+    document.getElementById("address").innerHTML+=response["city"] + ", ul. " + response["address"];
     addButtonListeners();
 }
 function addButtonListeners() {

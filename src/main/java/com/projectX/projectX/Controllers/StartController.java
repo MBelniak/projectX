@@ -10,7 +10,7 @@ public class StartController {
     public String getIndex() {
         return "addParty";
     }
-    @RequestMapping(value = "/search_party")
+    @RequestMapping(value = "/search_parties")
     public String getParties()
     {
         return "parties";
