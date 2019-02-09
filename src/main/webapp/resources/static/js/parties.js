@@ -5,7 +5,6 @@ window.onload=function () {
             url: "/parties",
             type: "GET",
             dataType: "JSON",
-            contentType: "application/json; charset=utf-8",
             success: function (result) {
                 response = result;
                 showParties();
@@ -20,7 +19,7 @@ window.onload=function () {
 function showParties() {
     for(i = 0; i<response.length; i++)
     {
-         document.getElementById("table_body").innerHTML+="<tr><td>"+response[i]["name"]+"</td><td>"+response[i]["date"]+
+         document.getElementById("table_body").innerHTML+='<tr><td><a href="/search_party/'+response[i]["id"]+'">'+response[i]["name"]+"</a></td><td>"+response[i]["date"]+
              "</td><td>"+response[i]["city"]+", ul. "+response[i]["address"]+"</td></tr>";
     }
 }

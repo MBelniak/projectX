@@ -15,6 +15,16 @@ public class StartController {
     {
         return "parties";
     }
+    @RequestMapping("/search_party/{id}")
+    public String getParty()
+    {
+        return "party";
+    }
+    @RequestMapping("/party_added")
+    public String partyAdded()
+    {
+        return "partyAdded";
+    }
 
 
 }

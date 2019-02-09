@@ -8,10 +8,11 @@ window.onload=function()
                 contentType: "application/json; charset=utf-8",
                 data: prepareJSON(),
                 success: function (result) {
-                    console.log(result);
+                    console.log(JSON.stringify(result));
+                    window.location.href='/party_added';
                 },
                 error:function (error) {
-                    console.log("Error: "+error);
+                    alert("Error: "+error);
                 }
             })
     });
