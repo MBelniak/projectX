@@ -10,19 +10,21 @@ window.onload=function () {
             showParty();
         },
         error: function () {
-            console.log("Ups! Something went wrong.");
+            alert("Ups! Something went wrong.");
         }
     })
 };
 
 function showParty() {
-    document.getElementById("party_name").innerHTML+=response["name"];
-    document.getElementById("description").innerHTML+=response["description"];
-    document.getElementById("date").innerHTML+=response["date"];
-    document.getElementById("address").innerHTML+=response["city"] + ", ul. " + response["address"];
-    addButtonListeners();
-}
-function addButtonListeners() {
-    document.getElementById("back").onclick = function () { window.location.href = "/search_parties" };
-    document.getElementById("main_page").onclick = function () { window.location.href = "/" };
+    $("#party_name").html(response["name"]);
+    $("#description").html(response["description"]);
+    $("#date").html(response["date"]);
+    $("#address").html(response["city"] + ", ul. " + response["address"]);
+
+    $("#back").click(function () {
+        window.location.href = "/search_parties"
+    });
+    $("#main_page").click(function () {
+        window.location.href = "/"
+    });
 }

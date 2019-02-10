@@ -10,10 +10,11 @@ window.onload=function () {
                 showParties();
             },
             error: function (error) {
-                console.log("Error: "+error);
+                alert("Error: "+error);
             }
         }
     )
+    $("#main_page").click(function () {window.location.href="/";});
 };
 
 function showParties() {

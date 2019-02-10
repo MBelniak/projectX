@@ -10,8 +10,7 @@ window.onload=function()
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: requestJSON,
-                success: function (result) {
-                    console.log(JSON.stringify(result));
+                success: function () {
                     window.location.href='/party_added';
                 },
                 error:function (error) {
@@ -19,17 +18,14 @@ window.onload=function()
                 }
             })
     });
-    var inputs = document.getElementsByClassName("input");
-    for(i=0; i<inputs.length; i++)
+    $("#back").click(function () {window.location.href="/";});
+    $(".listened").focusin(function ()
     {
-        inputs[i].addEventListener("focusin", function (){removeDanger(inputs[i]);}, false);
-    }
+        if($(this).hasClass("is-danger"))
+            $(this).removeClass("is-danger");
+    });
 };
 
-function removeDanger(input) {
-        if($(input).hasClass("is_danger"))
-            $(input).removeClass("is-danger");
-}
 function prepareJSON() {
     var obj = {};
     obj.name = $("#name").val();
