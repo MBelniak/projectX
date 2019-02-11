@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.springframework.org/schema/mvc">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" th:href="@{party.css}"/>
+    <link rel="stylesheet" th:href="@{/css/party.css}"/>
     <script th:src="@{/js/party.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery-3.3.1.min.js}" type="text/javascript"></script>
     <title>PARTY TIME!</title>
@@ -20,16 +20,23 @@
             </div>
         </div>
     </section>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <img th:src="@{/images/{name}(name=${party.image.name})}"/>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div class="container">
             <h2 class="subtitle">Party name</h2>
-            <p class="limited" id="party_name"></p><br/><br/>
+            <p class="limited" id="party_name" th:text="${party.name}"></p><br/><br/>
             <h2 class="subtitle">Description</h2>
-            <p class="limited" id="description"></p><br/><br/>
+            <p class="limited" id="description" th:text="${party.description}"></p><br/><br/>
             <h2 class="subtitle">When:</h2>
-            <p class="limited" id="date"></p><br/><br/>
+            <p class="limited" id="date" th:text="${party.date}"></p><br/><br/>
             <h2 class="subtitle">Where:</h2>
-            <p class="limited" id="address"></p><br/>
+            <p class="limited" id="address" th:text="${party.city} + ', ul. ' + ${party.address}"></p><br/>
             <button class="button is-primary" id="back">Back</button>
             <button class="button" id="main_page">Main Page</button>
         </div>

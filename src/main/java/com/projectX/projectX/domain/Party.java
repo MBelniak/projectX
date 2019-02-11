@@ -28,7 +28,7 @@ public class Party implements Serializable {
 
     @JsonCreator
     public Party(@JsonProperty("name") String name,@JsonProperty("description") String description,@JsonProperty("date") String date,
-                 @JsonProperty("city") String city,@JsonProperty("address") String address, @JsonProperty("image") String imageName) {
+                 @JsonProperty("city") String city,@JsonProperty("address") String address, @JsonProperty("imageName") String imageName) {
         this.name = name;
         this.description = description;
         try {
@@ -38,7 +38,9 @@ public class Party implements Serializable {
         }
         this.city = city;
         this.address = address;
-        this.image = new Image(imageName);
+        if(imageName!=null) {
+            this.image = new Image(imageName);
+        }
     }
 
     public Long getId() {

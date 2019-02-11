@@ -1,7 +1,6 @@
 package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.Party;
-import com.projectX.projectX.repository.ImageRepository;
 import com.projectX.projectX.service.ImageService;
 import com.projectX.projectX.service.PartyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,8 @@ public class PartiesController {
     @RequestMapping(method = RequestMethod.POST, value = "/parties")
     public void addParty(@RequestBody Party party)
     {
-        imageService.saveImage(party.getImage());
+        if(party.getImage()!=null)
+            party.setImage(imageService.getImageEntity(party.getImage().getName()));
         partyService.addParty(party);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/parties/{id}")

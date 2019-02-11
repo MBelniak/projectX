@@ -1,8 +1,13 @@
-var form, name, description, date, city, address, requestJSON;
+var requestJSON;
 window.onload=function()
 {
     var file_input = document.querySelector("#image");
-    $("#send_button").click(function () {
+    $("#send_button").click(function ()
+    {
+            requestJSON = prepareJSON();
+            if(requestJSON==null)
+            return;
+
             var formData = new FormData();
             var files =  file_input.files;
             if(files.length!=0) {
@@ -15,10 +20,13 @@ window.onload=function()
                         data: formData,
                         processData: false,
                         contentType: false,
-                        success: function(){
-                            requestJSON = prepareJSON();
-                            if(requestJSON==null)
+                        success: function(response){
+                            if(response=="") {
+                                $("#error_file").html("Error occured when tried to upload an image. \nPlease ensure that you're uploading an image.");
+                                file_input.value = "";
                                 return;
+                            }
+                            requestJSON.imageName = response;
                             ajaxPostParty();
                         },
                         error: function (error) {
@@ -32,6 +40,8 @@ window.onload=function()
                 requestJSON = prepareJSON();
                 if(requestJSON==null)
                     return;
+
+                requestJSON.imageName = null;
                 ajaxPostParty();
             }
 
@@ -54,7 +64,7 @@ function ajaxPostParty() {
                 window.location.href='/party_added';
             },
             error:function (error) {
-                alert("Error: "+error);
+                alert("Cannot add party: "+error);
             }
         });
 }
@@ -65,7 +75,7 @@ function prepareJSON() {
     obj.date = $("#date").val();
     obj.city = $("#city").val();
     obj.address = $("#address").val();
-    obj.image = $("#image").val();
+    obj.imageName="";
 
     if(obj.name == "")
     {
