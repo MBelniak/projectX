@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ImageService {
@@ -30,11 +32,17 @@ public class ImageService {
     {
         return resourceLoader.getResource("file:"+IMAGE_DIR_ROOT+"/"+name);
     }
+
+    public void saveImage(Image image)
+    {
+        imageRepository.save(image);
+    }
     public void createImage(MultipartFile file) throws IOException {
         if(!file.isEmpty())
         {
-            Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, file.getOriginalFilename()));
-            imageRepository.save(new Image(file.getOriginalFilename()));
+            String[] dir_names = file.getOriginalFilename().split("\\\\");
+            String file_name = dir_names[dir_names.length - 1];
+            Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, file_name));
         }
     }
     public void deleteImage(String filename) throws IOException {

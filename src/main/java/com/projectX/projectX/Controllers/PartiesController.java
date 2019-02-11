@@ -1,6 +1,8 @@
 package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.Party;
+import com.projectX.projectX.repository.ImageRepository;
+import com.projectX.projectX.service.ImageService;
 import com.projectX.projectX.service.PartyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import java.util.List;
 public class PartiesController {
 
     private final PartyServiceImpl partyService;
+    private final ImageService imageService;
 
     @Autowired
-    public PartiesController(PartyServiceImpl partyService) {
+    public PartiesController(PartyServiceImpl partyService, ImageService imageService) {
         this.partyService = partyService;
+        this.imageService = imageService;
     }
 
     @RequestMapping("/parties")
@@ -33,12 +37,14 @@ public class PartiesController {
     @RequestMapping(method = RequestMethod.POST, value = "/parties")
     public void addParty(@RequestBody Party party)
     {
-            partyService.addParty(party);
+        imageService.saveImage(party.getImage());
+        partyService.addParty(party);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/parties/{id}")
     public void updateParty(@RequestBody Party party, @PathVariable Long id)
     {
         partyService.updateParty(party, id);
     }
+
 
 }

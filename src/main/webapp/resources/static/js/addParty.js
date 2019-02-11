@@ -1,22 +1,40 @@
 var form, name, description, date, city, address, requestJSON;
 window.onload=function()
 {
+    var file_input = document.querySelector("#image");
     $("#send_button").click(function () {
-        requestJSON = prepareJSON();
-        if(requestJSON==null)
-            return;
-        $.ajax(
-            {   url: "/parties",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: requestJSON,
-                success: function () {
-                    window.location.href='/party_added';
-                },
-                error:function (error) {
-                    alert("Error: "+error);
-                }
-            })
+            var formData = new FormData();
+            var files =  file_input.files;
+            if(files.length!=0) {
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/images",
+                        type: "POST",
+                        enctype: 'multipart/form-data',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(){
+                            requestJSON = prepareJSON();
+                            if(requestJSON==null)
+                                return;
+                            ajaxPostParty();
+                        },
+                        error: function (error) {
+                            $("#error_file").html("Cannot upload a file: "+error.value+"\nYou can try with other file or post a party without an image.");
+                            file_input.value = "";
+                        }
+                    }
+                )
+            }
+            else {
+                requestJSON = prepareJSON();
+                if(requestJSON==null)
+                    return;
+                ajaxPostParty();
+            }
+
     });
     $("#back").click(function () {window.location.href="/";});
     $(".listened").focusin(function ()
@@ -26,6 +44,20 @@ window.onload=function()
     });
 };
 
+function ajaxPostParty() {
+    $.ajax(
+        {   url: "/parties",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(requestJSON),
+            success: function () {
+                window.location.href='/party_added';
+            },
+            error:function (error) {
+                alert("Error: "+error);
+            }
+        });
+}
 function prepareJSON() {
     var obj = {};
     obj.name = $("#name").val();
@@ -33,6 +65,7 @@ function prepareJSON() {
     obj.date = $("#date").val();
     obj.city = $("#city").val();
     obj.address = $("#address").val();
+    obj.image = $("#image").val();
 
     if(obj.name == "")
     {
@@ -65,7 +98,7 @@ function prepareJSON() {
         return null;
     }
     $("#warning").html("");
-    return JSON.stringify(obj);
+    return obj;
 }
 
 
