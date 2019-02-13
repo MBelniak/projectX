@@ -41,6 +41,8 @@ public class Party implements Serializable {
         if(imageName!=null) {
             this.image = new Image(imageName);
         }
+        else
+            image = null;
     }
 
     public Long getId() {

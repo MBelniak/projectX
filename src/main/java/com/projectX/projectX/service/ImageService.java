@@ -4,6 +4,8 @@ import com.projectX.projectX.domain.Image;
 import com.projectX.projectX.repository.ImageRepository;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class ImageService {
 
-    private static String IMAGE_DIR_ROOT = "src/main/webapp/resources/static/images";
+    private static String IMAGE_DIR_ROOT = "C:\\Users\\rubik\\IdeaProjects\\projectX\\projectX\\images";
 
     private final ImageRepository imageRepository;
     private final ResourceLoader resourceLoader;
@@ -28,15 +30,9 @@ public class ImageService {
     public ImageService(ImageRepository imageRepository, ResourceLoader resourceLoader) {
         this.imageRepository = imageRepository;
         this.resourceLoader = resourceLoader;
-        try {
-            FileUtils.cleanDirectory(new File(IMAGE_DIR_ROOT));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    public Resource getImage(String name)
-    {
+    public Resource getImage(String name) throws IOException {
         return resourceLoader.getResource("file:"+IMAGE_DIR_ROOT+"/"+name);
     }
 
@@ -56,8 +52,7 @@ public class ImageService {
                 return null;
             Image image = new Image("temporaryName");
             imageRepository.save(image);
-            String[] dirs = file.getOriginalFilename().split("\\.");    //could use ContentType, but for jpg returns jpeg :/
-            image.setName("partyImage("+image.getId()+")."+dirs[dirs.length-1]);
+            image.setName("partyImage("+image.getId()+")."+file.getContentType().split("/")[1]);
             imageRepository.save(image);
             Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, image.getName()), StandardCopyOption.REPLACE_EXISTING);
             return image.getName();
@@ -68,5 +63,10 @@ public class ImageService {
         final Image image = imageRepository.findByName(filename);
         imageRepository.delete(image);
         Files.deleteIfExists(Paths.get(IMAGE_DIR_ROOT, filename));
+    }
+    @Bean
+    CommandLineRunner setUp()
+    {
+        return (args)-> FileUtils.cleanDirectory(new File(IMAGE_DIR_ROOT));
     }
 }

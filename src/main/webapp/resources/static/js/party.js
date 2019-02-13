@@ -1,6 +1,5 @@
-window.onload=buttonClicks;
+window.onload= function () {
 
-function buttonClicks() {
     $("#back").click(function () {
         window.location.href = "/search_parties";
     });

@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" th:href="@{/css/addParty.css}"/>
     <script th:src="@{/js/addParty.js}" type="text/javascript"></script>
-    <script th:src="@{/js/jquery-3.3.1.min.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
     <title>PARTY TIME</title>
 </head>
 <body>
@@ -24,32 +23,23 @@
         </div>
     </section>
     <section class="section">
-        <nav class="level">
-            <div class="level-left">
-                <div class="level-item">
-                <div>
-                    Name of the party:<br/>
-                    <input class="input listened"  id="name" placeholder="e.g. My sweet 16!"/><br/>
-                    Description:<br/>
-                    <textarea class="textarea listened" id="description" placeholder="e.g Let's celebrate the occasion!"></textarea><br/>
-                    Date:<br/>
-                    <input type="date" class="listened" id="date"/><br/>
-                    City:<br/>
-                    <input class="input listened" id="city" placeholder="e.g. Warsaw"/><br/>
-                    Address:<br/>
-                    <input class="input listened" id="address" placeholder="e.g. Waszyngtona 2/12"/><br/>
-                    Add image to the party:<br/>
-                    <input type="file" id="image"/><p id="error_file"></p><br/>
-                    <button class="button is-primary" id="send_button">Add</button>
-                    <button class="button" id="back">Back</button>
-                    <p id="warning"></p>
-                </div>
-            </div>
-            </div>
-            <div class="level-right">
-
-            </div>
-        </nav>
+        <div style="width: 80%; margin: 0 auto; align-content: center;">
+            Name of the party:<br/>
+            <input class="input listened"  id="name" placeholder="e.g. My sweet 16!"/><br/>
+            Description:<br/>
+            <textarea class="textarea listened" id="description" placeholder="e.g Let's celebrate the occasion!"></textarea><br/>
+            Date:<br/>
+            <input type="date" class="listened" id="date"/><br/>
+            City:<br/>
+            <input class="input listened" id="city" placeholder="e.g. Warsaw"/><br/>
+            Address:<br/>
+            <input class="input listened" id="address" placeholder="e.g. Waszyngtona 2/12"/><br/>
+            Add image to the party:<br/>
+            <input type="file" id="image"/><p id="error_file"></p><br/>
+            <button class="button is-primary" id="send_button">Add</button>
+            <button class="button" id="back">Back</button>
+            <p id="warning"></p>
+        </div>
     </section>
 </body>
 </html>

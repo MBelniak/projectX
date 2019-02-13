@@ -1,4 +1,23 @@
 .limited{
-    max-width:400px;
+    max-width:300px;
     word-wrap:break-word;
 }
+
+.image{
+    align-items: stretch;
+    width: 100%;
+}
+
+.left, .right{
+    filter: blur(8px);
+    opacity: 0.9;
+    transform: scale(1.2);
+    margin-left: -10px;
+}
+.level{
+    align-items: stretch;
+}
+.level-item{
+    overflow: hidden;
+}
+
