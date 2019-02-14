@@ -38,6 +38,8 @@ public class PartiesController {
     {
         if(party.getImage()!=null)
             party.setImage(imageService.getImageEntity(party.getImage().getName()));
+        if(party.getOrganizer()!=null)
+
         partyService.addParty(party);
     }
     @RequestMapping(method = RequestMethod.PUT, value = "/parties/{id}")

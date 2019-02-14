@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Party implements Serializable {
@@ -19,16 +21,27 @@ public class Party implements Serializable {
     private String description;
     @Temporal(TemporalType.DATE)
     private Date date;
+    @Temporal(TemporalType.TIME)
+    private Date time;
     private String city;
     private String address;
     @OneToOne
     private Image image;
+    @ManyToOne
+    private User organizer;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    private Set<User> invitedUsers;
 
     public Party() {}
 
     @JsonCreator
     public Party(@JsonProperty("name") String name,@JsonProperty("description") String description,@JsonProperty("date") String date,
-                 @JsonProperty("city") String city,@JsonProperty("address") String address, @JsonProperty("imageName") String imageName) {
+                 @JsonProperty("time") String time,@JsonProperty("city") String city,@JsonProperty("address") String address,
+                 @JsonProperty("imageName") String imageName, @JsonProperty("organizer") String organizer)
+    {
         this.name = name;
         this.description = description;
         try {
@@ -36,14 +49,38 @@ public class Party implements Serializable {
         } catch (ParseException e) {
             this.date = null;
         }
+        try {
+            this.time = new SimpleDateFormat("HH:mm").parse(time);
+        } catch (ParseException e) {
+            this.time = null;
+        }
         this.city = city;
         this.address = address;
         if(imageName!=null) {
             this.image = new Image(imageName);
         }
         else
-            image = null;
+            this.image = null;
+        if(organizer!=null) {
+            this.organizer = new User(organizer);
+        }
+        else
+            this.organizer = null;
+        this.invitedUsers = new HashSet<>();
     }
+
+    public void addInvitedUser(User user)
+    {
+        invitedUsers.add(user);
+        user.getAttendedParties().add(this);
+    }
+
+    public void deleteInvitedUser(User user)
+    {
+        invitedUsers.remove(user);
+        user.getAttendedParties().remove(this);
+    }
+
 
     public Long getId() {
         return id;
@@ -99,5 +136,29 @@ public class Party implements Serializable {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public User getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(User organizer) {
+        this.organizer = organizer;
+    }
+
+    public Set<User> getInvitedUsers() {
+        return invitedUsers;
+    }
+
+    public void setInvitedUsers(Set<User> invitedUsers) {
+        this.invitedUsers = invitedUsers;
     }
 }

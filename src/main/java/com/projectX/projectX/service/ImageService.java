@@ -53,7 +53,6 @@ public class ImageService {
             Image image = new Image("temporaryName");
             imageRepository.save(image);
             image.setName("partyImage("+image.getId()+")."+file.getContentType().split("/")[1]);
-            imageRepository.save(image);
             Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, image.getName()), StandardCopyOption.REPLACE_EXISTING);
             return image.getName();
         }

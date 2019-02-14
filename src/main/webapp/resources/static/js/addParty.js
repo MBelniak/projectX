@@ -1,4 +1,4 @@
-var requestJSON;
+var requestJSON, warning;
 window.onload=function()
 {
     var file_input = document.querySelector("#image");
@@ -46,12 +46,14 @@ window.onload=function()
             }
 
     });
+
     $("#back").click(function () {window.location.href="/";});
     $(".listened").focusin(function ()
     {
         if($(this).hasClass("is-danger"))
             $(this).removeClass("is-danger");
     });
+    warning = $("#warning");
 };
 
 function ajaxPostParty() {
@@ -69,46 +71,63 @@ function ajaxPostParty() {
         });
 }
 function prepareJSON() {
+    var name = $("#name");
+    var desc = $("#description");
+    var date = $("#date");
+    var time = $("#time");
+    var city = $("#city");
+    var address = $("#address");
+
     var obj = {};
-    obj.name = $("#name").val();
-    obj.description  = $("#description").val();
-    obj.date = $("#date").val();
-    obj.city = $("#city").val();
-    obj.address = $("#address").val();
+    obj.name = name.val();
+    obj.description = desc.val();
+    obj.date = date.val();
+    obj.time = time.val();
+    obj.city = city.val();
+    obj.address = address.val();
     obj.imageName="";
 
     if(obj.name == "")
     {
-        $("#name").addClass("is-danger");
-        $("#warning").html("Please fill in all required fields.");
+        name.addClass("is-danger");
+        setWarn();
         return null;
     }
     if(obj.description == "")
     {
-         $("#description").addClass("is-danger");
-        $("#warning").html("Please fill in all required fields.");
+        desc.addClass("is-danger");
+        setWarn();
         return null;
     }
     if(obj.date=="")
     {
-        $("#date").addClass("is-danger");
-        $("#warning").html("Please fill in all required fields.");
+        date.addClass("is-danger");
+        setWarn();
+        return null;
+    }
+    if(obj.time=="")
+    {
+        time.addClass("is-danger");
+        setWarn();
         return null;
     }
     if(obj.city=="")
     {
-        $("#city").addClass("is-danger");
-        $("#warning").html("Please fill in all required fields.");
+        city.addClass("is-danger");
+        setWarn();
         return null;
     }
     if(obj.address=="")
     {
-        $("#address").addClass("is-danger");
-        $("#warning").html("Please fill in all required fields.");
+        address.addClass("is-danger");
+        setWarn();
         return null;
     }
-    $("#warning").html("");
+    warning.html("");
     return obj;
 }
 
+function setWarn() {
+    warning.html("Please fill in all required fields.");
+}
 

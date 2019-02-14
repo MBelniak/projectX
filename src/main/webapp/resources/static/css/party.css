@@ -1,10 +1,9 @@
 .limited{
-    max-width:300px;
+    max-width:70%;
     word-wrap:break-word;
 }
 
 .image{
-    align-items: stretch;
     width: 100%;
 }
 
@@ -19,5 +18,7 @@
 }
 .level-item{
     overflow: hidden;
+    width:33%;
+    max-width: none;
 }
 
