@@ -33,6 +33,11 @@ public class Party implements Serializable {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
+    @JoinTable(
+            name="PARTY_USER",
+            joinColumns = @JoinColumn(name="PARTY_ID", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="USER_ID", referencedColumnName = "id")
+    )
     private Set<User> invitedUsers;
 
     public Party() {}
@@ -72,15 +77,14 @@ public class Party implements Serializable {
     public void addInvitedUser(User user)
     {
         invitedUsers.add(user);
-        user.getAttendedParties().add(this);
+        user.getAttended_parties().add(this);
     }
 
     public void deleteInvitedUser(User user)
     {
         invitedUsers.remove(user);
-        user.getAttendedParties().remove(this);
+        user.getAttended_parties().remove(this);
     }
-
 
     public Long getId() {
         return id;

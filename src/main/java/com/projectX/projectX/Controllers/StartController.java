@@ -20,27 +20,31 @@ public class StartController {
     }
 
     @RequestMapping(value="/new_party")
-    public String getIndex() {
+    public String addPartyPage() {
         return "addParty";
     }
     @RequestMapping(value = "/search_parties")
-    public String getParties()
+    public String searchPartyPage()
     {
         return "parties";
     }
     @RequestMapping("/search_party/{id}")
-    public String getParty(Model model, @PathVariable Long id)
+    public String partyPage(Model model, @PathVariable Long id)
     {
         model.addAttribute("party", partyService.getParty(id));
         return "party";
     }
     @RequestMapping("/party_added")
-    public String partyAdded()
+    public String partyAddedPage()
     {
         return "partyAdded";
     }
 
-
+    @RequestMapping("/login")
+    public String loginPage()
+    {
+        return "login";
+    }
 
 
 }

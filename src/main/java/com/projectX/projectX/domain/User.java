@@ -13,27 +13,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NaturalId
-    private String userName;
-    private String hashPassword;
-    private String firstName;
-    private String surname;
     private String email;
+    private String hash_password;
+    private String first_name;
+    private String surname;
+    @ManyToOne
+    private Role role;
     @ManyToMany(mappedBy = "invitedUsers")
-    private Set<Party> attendedParties;
+    private Set<Party> attended_parties;
 
-    public User(String userName) {
-        this.userName = userName;
+    public User() {
+    }
+
+    public User(String email) {
+        this.email = email;
     }
 
     @JsonCreator
-    public User(@JsonProperty("userName") String userName, @JsonProperty("password") String hashPassword,@JsonProperty("firstName") String firstName,
-                @JsonProperty("surname") String surname, @JsonProperty("email") String email) {
-        this.userName = userName;
-        this.hashPassword = hashPassword;
-        this.firstName = firstName;
+    public User(@JsonProperty("hash_password") String hash_password,@JsonProperty("first_name") String firstName,
+                @JsonProperty("surname") String surname, @JsonProperty("email") String email, @JsonProperty("role") String role) {
+        this.hash_password = hash_password;
+        this.first_name = first_name;
         this.surname = surname;
         this.email = email;
-        this.attendedParties = new HashSet<>();
+        this.attended_parties = new HashSet<>();
+        this.role = new Role(role);
     }
 
     public Long getId() {
@@ -44,27 +48,51 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getHashPassword() {
-        return hashPassword;
+    public String getHash_password() {
+        return hash_password;
     }
 
-    public void setHashPassword(String hashPassword) {
-        this.hashPassword = hashPassword;
+    public void setHash_password(String hash_password) {
+        this.hash_password = hash_password;
     }
 
-    public Set<Party> getAttendedParties() {
-        return attendedParties;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setAttendedParties(Set<Party> attendedParties) {
-        this.attendedParties = attendedParties;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Set<Party> getAttended_parties() {
+        return attended_parties;
+    }
+
+    public void setAttended_parties(Set<Party> attended_parties) {
+        this.attended_parties = attended_parties;
     }
 }
