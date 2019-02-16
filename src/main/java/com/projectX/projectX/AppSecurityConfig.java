@@ -38,17 +38,17 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/login", "/")
+                    .antMatchers( "/")
                     .permitAll()
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/console", "/console/**")
+                    .hasAnyAuthority("ADMIN")
                     .anyRequest()
                     .authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/login")
-                    .permitAll()
-                    .and()
-                    .authorizeRequests()
-                    .antMatchers("/console", "/console/**")
-                    .hasRole("ADMIN");
+                    .permitAll();
     }
 }
