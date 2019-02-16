@@ -32,7 +32,7 @@ public class ImageService {
         this.resourceLoader = resourceLoader;
     }
 
-    public Resource getImage(String name) throws IOException {
+    public Resource getImage(String name){
         return resourceLoader.getResource("file:"+IMAGE_DIR_ROOT+"/"+name);
     }
 

@@ -2,20 +2,36 @@ package com.projectX.projectX.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Validated
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NaturalId
+    @Column(nullable = false, unique = true)
+    @NotNull(message = "Please fill in 'email' field.")
+    @Email(message = "Email is invalid")
     private String email;
+    @NotNull(message = "Please fill in 'password' field.")
+    @Length(min = 8, message = "Password has to be at least 8 char. long.")
     private String hash_password;
+    @NotNull(message = "Please fill in 'first name' field.")
+    @Pattern(regexp = "[\\p{L}]+$")
     private String first_name;
+    @NotNull(message = "Please fill in 'surname' field.")
+    @Pattern(regexp = "[\\p{L}]+$")
     private String surname;
     @ManyToOne
     private Role role;
@@ -30,14 +46,13 @@ public class User {
     }
 
     @JsonCreator
-    public User(@JsonProperty("hash_password") String hash_password,@JsonProperty("first_name") String firstName,
-                @JsonProperty("surname") String surname, @JsonProperty("email") String email, @JsonProperty("role") String role) {
+    public User(@JsonProperty("hash_password") String hash_password,@JsonProperty("first_name") String first_name,
+                @JsonProperty("surname") String surname, @JsonProperty("email") String email) {
         this.hash_password = hash_password;
         this.first_name = first_name;
         this.surname = surname;
         this.email = email;
         this.attended_parties = new HashSet<>();
-        this.role = new Role(role);
     }
 
     public Long getId() {

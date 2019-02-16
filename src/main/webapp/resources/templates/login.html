@@ -1,24 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <title>PARTY TIME! - LOGIN</title>
 </head>
 <body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container" >
+            <h1 class="title">Sign in</h1>
+        </div>
+    </div>
+</section>
+
+<section th:if="${#vars['flash.errorMessage']!=null}" class="hero is-danger" style="opacity: 0.7;">
+        <div class="hero-body">
+            <div class="container" style="text-align: center">
+                <h2 th:text="${#vars['flash.errorMessage']}"></h2>
+            </div>
+        </div>
+</section>
+<section th:if="${#vars['flash.registerMessage']!=null}" class="hero is-info" style="opacity: 0.9;">
+    <div class="hero-body">
+        <div class="container" style="text-align: center">
+            <h2 th:text="${#vars['flash.registerMessage']}"></h2>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div style="max-width: 400px; margin: 0 auto; align-content: center;">
+
     <form action="login" method="post">
-        <table>
-            <tr>
-                <td>User: </td>
-                <td><input name="username" type="text"/></td>
-            </tr>
-            <tr>
-                <td>Pasword:</td>
-                <td><input name="password" type="text"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" name="submit" value="sign in"/></td>
-            </tr>
-            <table>
+        E-mail address:<br/>
+        <input class="input" name="username" type="text" placeholder="example@gmail.com"/><br/>
+        Password:<br/>
+        <input class="input" name="password" type="password" placeholder="password"/><br/>
+        <input class="button is-primary" type="submit" name="submit" value="Sign in"/>
     </form>
+    <form action="/register">
+        <input type="submit" class="button" value="Sign up">
+    </form>
+    </div>
+
+</section>
 </body>
 </html>

@@ -23,7 +23,7 @@ public class PartyServiceImpl implements PartyService {
     public List<Party> getAll()
     {
         List<Party> parties = new ArrayList<>();
-        partyRepository.findAll().forEach(((ArrayList<Party>) parties)::add);
+        partyRepository.findAll().forEach(parties::add);
         return parties;
     }
 

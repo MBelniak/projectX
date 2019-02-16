@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
 
 
 @Controller
@@ -23,17 +26,20 @@ public class StartController {
     public String addPartyPage() {
         return "addParty";
     }
+
     @RequestMapping(value = "/search_parties")
     public String searchPartyPage()
     {
         return "parties";
     }
+
     @RequestMapping("/search_party/{id}")
     public String partyPage(Model model, @PathVariable Long id)
     {
         model.addAttribute("party", partyService.getParty(id));
         return "party";
     }
+
     @RequestMapping("/party_added")
     public String partyAddedPage()
     {
@@ -41,10 +47,25 @@ public class StartController {
     }
 
     @RequestMapping("/login")
-    public String loginPage()
+    public String loginPage(@RequestParam Map<String, String> queryParameter, RedirectAttributes redirectAttributes)
     {
-        return "login";
+        if(queryParameter.isEmpty())
+            return "/login";
+        if(queryParameter.containsKey("register")) {
+            redirectAttributes.addFlashAttribute("flash.registerMessage", "Successfully signed up :)");
+            return "redirect:login";
+        }
+        redirectAttributes.addFlashAttribute("flash.errorMessage", "Sorry, e-mail or password is incorrect");
+        return "redirect:/login";
+
     }
+
+    @RequestMapping("/register")
+    public String registerPage()
+    {
+        return "register";
+    }
+
 
 
 }
