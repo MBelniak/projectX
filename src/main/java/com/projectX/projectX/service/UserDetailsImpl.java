@@ -10,25 +10,29 @@ import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private User user;
+    private String username;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(User user) {
-        this.user = user;
+        this.username = user.getEmail();
+        this.password = user.getHash_password();
+        this.authorities = Collections.singleton(new SimpleGrantedAuthority(user.getRole().getName()));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().getName()));
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getHash_password();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return username;
     }
 
     @Override

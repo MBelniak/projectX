@@ -1,4 +1,4 @@
-package com.projectX.projectX;
+package com.projectX.projectX.config;
 
 
 import org.springframework.context.annotation.Bean;

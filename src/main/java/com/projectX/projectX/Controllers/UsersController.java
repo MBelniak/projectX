@@ -2,6 +2,7 @@ package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.User;
 import com.projectX.projectX.service.RoleService;
+import com.projectX.projectX.service.UserDetailsServiceImpl;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,12 +20,14 @@ public class UsersController {
     private RoleService roleService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Autowired
     public UsersController(UserService userService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+
 
     @RequestMapping("/users/{email}")
     public String isEmailAvailable(@PathVariable("email") String email)

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,12 +23,13 @@ public class StartController {
         this.partyService = partyService;
     }
 
-    @RequestMapping(value="/new_party")
+
+    @RequestMapping("/new_party")
     public String addPartyPage() {
         return "addParty";
     }
 
-    @RequestMapping(value = "/search_parties")
+    @RequestMapping("/search_parties")
     public String searchPartyPage()
     {
         return "parties";
