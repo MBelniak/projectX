@@ -51,15 +51,17 @@ public class StartController {
     @RequestMapping("/login")
     public String loginPage(@RequestParam Map<String, String> queryParameter, RedirectAttributes redirectAttributes)
     {
-        if(queryParameter.isEmpty())
-            return "/login";
         if(queryParameter.containsKey("register")) {
             redirectAttributes.addFlashAttribute("flash.registerMessage", "Successfully signed up :)");
             return "redirect:login";
         }
-        redirectAttributes.addFlashAttribute("flash.errorMessage", "Sorry, e-mail or password is incorrect");
-        return "redirect:/login";
+        return "/login";
+    }
 
+    @RequestMapping("/logout-success")
+    public String logout()
+    {
+        return "logoutSuccess";
     }
 
     @RequestMapping("/register")
@@ -67,7 +69,6 @@ public class StartController {
     {
         return "register";
     }
-
 
 
 }

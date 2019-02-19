@@ -45,7 +45,7 @@ public class Party implements Serializable {
     @JsonCreator
     public Party(@JsonProperty("name") String name,@JsonProperty("description") String description,@JsonProperty("date") String date,
                  @JsonProperty("time") String time,@JsonProperty("city") String city,@JsonProperty("address") String address,
-                 @JsonProperty("imageName") String imageName, @JsonProperty("organizer") String organizer)
+                 @JsonProperty("imageName") String imageName)
     {
         this.name = name;
         this.description = description;
@@ -66,11 +66,6 @@ public class Party implements Serializable {
         }
         else
             this.image = null;
-        if(organizer!=null) {
-            this.organizer = new User(organizer);
-        }
-        else
-            this.organizer = null;
         this.invitedUsers = new HashSet<>();
     }
 

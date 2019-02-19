@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -51,8 +50,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                     .and()
                     .authorizeRequests()
-                    .antMatchers( "/", "/register")
+                    .antMatchers( "/", "/register", "/login")
                     .permitAll()
+                    .antMatchers("/logout", "/logout-success")
+                    .authenticated()
                     .antMatchers("/console", "/console/**")
                     .hasAnyAuthority("ADMIN")
                     .anyRequest()
@@ -68,8 +69,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/logout-success")
-                    .permitAll();
+                    .logoutSuccessUrl("/logout-success");
     }
 
     @Override

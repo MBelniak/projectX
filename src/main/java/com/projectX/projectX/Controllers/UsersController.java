@@ -2,7 +2,6 @@ package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.User;
 import com.projectX.projectX.service.RoleService;
-import com.projectX.projectX.service.UserDetailsServiceImpl;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
