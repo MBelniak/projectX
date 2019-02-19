@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UsersController {
@@ -28,20 +30,23 @@ public class UsersController {
     public String isEmailAvailable(@PathVariable("email") String email)
     {
         if(userService.getUser(email)!=null)
-            return "{exists: \"yes\"}";
-        return null;
+            return "exists";
+        return "";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
-    public void addUser(@RequestBody @Valid User user, BindingResult bindingResult)
+    public List<String> addUser(@RequestBody @Valid User user, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors())
         {
-
+            List<String> errors = new ArrayList<>();
+            bindingResult.getAllErrors().forEach(e -> errors.add(e.toString()));
+            return errors;
         }
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
         user.setRole(roleService.getRole("USER"));
         userService.addUser(user);
+        return null;
     }
 }
 

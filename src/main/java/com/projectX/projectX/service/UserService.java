@@ -22,8 +22,6 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findUserByEmail(s);
         if(user==null)
             throw new UsernameNotFoundException("User not found");
-
-
         return new UserDetailsImpl(user);
     }
 

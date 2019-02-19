@@ -3,20 +3,23 @@ window.onload=function () {
 
     email_input = $("#email");
     sign_up_button = $("#sign_up");
-    sign_up_button.disable();
-    email_input.addEventListener('input', function () {
+    sign_up_button.attr("disabled", true);
+    email_input.bind('input', function () {
         $.ajax({
             url: "/users/"+email_input.val(),
             type: "GET",
-            dataType: "JSON",
+            dataType: "text",
             success: function (result) {
-                if(result!=null)
-                    $("#warning").html("Sorry, this email is already in the database.")
-                else
-                    sign_up_button.enable();
+                if(result == "exists")
+                    $("#warning").html("Sorry, this email is already in the database.");
+                else {
+                    console.log(result);
+                    sign_up_button.attr("disabled", false);
+                    $("#warning").html("");
+                }
             },
             error: function (error) {
-              console.log("something's wrong.");
+              console.log("Something's wrong.");
             }
         })
         }
@@ -32,9 +35,15 @@ window.onload=function () {
             url: "/users",
             type: "POST",
             contentType: "application/json; charset=utf-8",
+            dataType: "text/plain",
             data: JSON.stringify(requestJSON),
-            success: function () {
-                window.location.href='/login?register=ok';
+            success: function (response) {
+                if(response==null)
+                    window.location.href='/login?register=ok';
+                else
+                {
+                    $("#warning").html("Error");
+                }
             },
             error:function (error) {
                 alert("Cannot add user: "+error);
