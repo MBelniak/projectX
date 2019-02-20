@@ -18,7 +18,7 @@ CREATE TABLE IMAGE
 
 CREATE TABLE USER
 (
-  id INT PRIMARY KEY,
+  id INT PRIMARY KEY auto_increment,
   email VARCHAR2(80),
   hash_password VARCHAR2(500),
   first_name VARCHAR2(100),

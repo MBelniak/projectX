@@ -1,25 +1,33 @@
-var sign_up_button, requestJSON, email_input;
+var sign_up_button, requestJSON, email_input, warning;
 window.onload=function () {
 
+    warning = $("#warning");
     email_input = $("#email");
     sign_up_button = $("#sign_up");
     sign_up_button.attr("disabled", true);
     email_input.bind('input', function () {
+        if(email_input.val()==="" || email_input.val().match(/[;?=+/\\"']+/g))
+        {
+            sign_up_button.attr("disabled", true);
+            return;
+        }
         $.ajax({
             url: "/users/"+email_input.val(),
             type: "GET",
             dataType: "text",
             success: function (result) {
-                if(result == "exists")
-                    $("#warning").html("Sorry, this email is already in the database.");
+                if(result == "exists") {
+                    warning.html("Sorry, this email is already in the database.");
+                    sign_up_button.attr("disabled", true);
+                }
                 else {
-                    console.log(result);
                     sign_up_button.attr("disabled", false);
-                    $("#warning").html("");
+                    warning.html("");
                 }
             },
             error: function () {
-              console.log("Something's wrong.");
+                sign_up_button.attr("disabled", true);
+                console.log("Something's wrong.");
             }
         })
         }
@@ -35,18 +43,19 @@ window.onload=function () {
             url: "/users",
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            dataType: "text/plain",
             data: JSON.stringify(requestJSON),
             success: function (response) {
-                if(response==null)
+                if(response=="")
                     window.location.href='/login?register=ok';
                 else
                 {
-                    $("#warning").html("Error");
+                    warning.html("Error: ");
+                    for(i = 0; i<response.length; i++)
+                        warning.append("<p>"+response[i]+"</p>");
                 }
             },
-            error:function (error) {
-                alert("Cannot add user: "+JSON.stringify(error));
+            error: function (error) {
+                    warning.html("Error "+ error.status+" - "+error.status);
             }
 
         })

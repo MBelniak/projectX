@@ -50,7 +50,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                     .and()
                     .authorizeRequests()
-                    .antMatchers( "/", "/register", "/login")
+                    .antMatchers( "/", "/register", "/login", "/users/**")
                     .permitAll()
                     .antMatchers("/logout", "/logout-success")
                     .authenticated()

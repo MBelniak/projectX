@@ -16,7 +16,7 @@ import java.util.Set;
 @Validated
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NaturalId
     @Column(nullable = false, unique = true)
@@ -45,7 +45,7 @@ public class User {
     }
 
     @JsonCreator
-    public User(@JsonProperty("hash_password") String hash_password,@JsonProperty("first_name") String first_name,
+    public User(@JsonProperty("password") String hash_password,@JsonProperty("first_name") String first_name,
                 @JsonProperty("surname") String surname, @JsonProperty("email") String email) {
         this.hash_password = hash_password;
         this.first_name = first_name;

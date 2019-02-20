@@ -1,19 +1,30 @@
 var response;
 window.onload=function () {
-    $.ajax(
-        {
-            url: "/parties",
-            type: "GET",
-            dataType: "JSON",
-            success: function (result) {
-                response = result;
-                showParties();
-            },
-            error: function (error) {
-                alert("Error: "+error);
-            }
-        }
-    );
+
+
+    $.ajax('/parties', {
+
+    }).then(function success(result) {
+        response = result;
+        showParties();
+    }, function fail(error) {
+        alert("Error: "+error);
+
+    });
+    // $.ajax(
+    //     {
+    //         url: "/parties",
+    //         type: "GET",
+    //         dataType: "JSON",
+    //         success: function (result) {
+    //             response = result;
+    //             showParties();
+    //         },
+    //         error: function (error) {
+    //             alert("Error: "+error);
+    //         }
+    //     }
+    // );
     $("#main_page").click(function () {window.location.href="/";});
 };
 

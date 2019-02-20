@@ -33,16 +33,15 @@ public class UsersController {
     {
         if(userService.getUser(email)!=null)
             return "exists";
-        return "";
+        return null;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
-    public List<String> addUser(@RequestBody @Valid User user, BindingResult bindingResult)
-    {
+    public  List<String> addUser(@RequestBody @Valid User user, BindingResult bindingResult) {
         if(bindingResult.hasErrors())
         {
             List<String> errors = new ArrayList<>();
-            bindingResult.getAllErrors().forEach(e -> errors.add(e.toString()));
+            bindingResult.getAllErrors().forEach(e->errors.add(e.getDefaultMessage()));
             return errors;
         }
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
