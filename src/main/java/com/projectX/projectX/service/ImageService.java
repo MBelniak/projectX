@@ -21,7 +21,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class ImageService {
 
-    private static String IMAGE_DIR_ROOT = "C:\\Users\\rubik\\IdeaProjects\\projectX\\projectX\\images";
+    private static final String IMAGE_DIR_ROOT = "C:\\Users\\rubik\\IdeaProjects\\projectX\\projectX\\images";
 
     private final ImageRepository imageRepository;
     private final ResourceLoader resourceLoader;
@@ -48,8 +48,14 @@ public class ImageService {
     public String createImage(MultipartFile file) throws IOException {
         if(!file.isEmpty())
         {
-            if(!file.getContentType().split("/")[0].equals("image"))
+            try {
+                if (!file.getContentType().split("/")[0].equals("image"))
+                    return null;
+            }
+            catch (NullPointerException e)
+            {
                 return null;
+            }
             Image image = new Image("temporaryName");
             imageRepository.save(image);
             image.setName("partyImage("+image.getId()+")."+file.getContentType().split("/")[1]);

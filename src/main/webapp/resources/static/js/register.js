@@ -18,7 +18,7 @@ window.onload=function () {
                     $("#warning").html("");
                 }
             },
-            error: function (error) {
+            error: function () {
               console.log("Something's wrong.");
             }
         })
@@ -46,11 +46,14 @@ window.onload=function () {
                 }
             },
             error:function (error) {
-                alert("Cannot add user: "+error);
+                alert("Cannot add user: "+JSON.stringify(error));
             }
 
         })
-    })
+    });
+    $('#back').click(function () {
+        window.location.href="/";
+    });
 };
 
 function prepareJSON() {

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImageRepository extends PagingAndSortingRepository<Image, Long> {
-    public Image findByName(String name);
+    Image findByName(String name);
 }

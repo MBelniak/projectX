@@ -13,7 +13,7 @@ window.onload=function () {
                 alert("Error: "+error);
             }
         }
-    )
+    );
     $("#main_page").click(function () {window.location.href="/";});
 };
 

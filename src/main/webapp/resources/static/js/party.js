@@ -6,4 +6,4 @@ window.onload= function () {
     $("#main_page").click(function () {
         window.location.href = "/";
     });
-}
+};

@@ -15,7 +15,7 @@ import java.net.URLConnection;
 @RestController
 public class ImagesController {
 
-    private ImageService imageService;
+    private final ImageService imageService;
 
     @Autowired
     public ImagesController(ImageService imageService) {
