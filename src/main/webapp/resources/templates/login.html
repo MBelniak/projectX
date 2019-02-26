@@ -35,10 +35,10 @@
     <h2 style="text-align: center">Sign in to continue.</h2><br/>
     <div style="max-width: 400px; margin: 0 auto; align-content: center;">
         <form action="login" method="post">
-            E-mail address:<br/>
-            <input class="input" name="username" type="text" placeholder="example@gmail.com"/><br/>
-            Password:<br/>
-            <input class="input" name="password" type="password" placeholder="password"/><br/>
+            <label class="label" for="username">E-mail address:</label>
+            <input class="input" id="username" name="username" type="text" placeholder="example@gmail.com" autofocus="autofocus"/><br/>
+            <label class="label" for="password">Password:</label>
+            <input class="input" name="password" id="password" type="password" placeholder="password123"/><br/>
             <input class="button is-primary" type="submit" name="submit" value="Sign in"/>
         </form>
         <form action="/register">

@@ -54,7 +54,7 @@ public class StartController {
             redirectAttributes.addFlashAttribute("flash.registerMessage", "Successfully signed up :)");
             return "redirect:login";
         }
-        return "/login";
+        return "login";
     }
 
     @RequestMapping("/logout-success")

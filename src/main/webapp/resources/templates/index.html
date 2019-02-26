@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="pl" >
 
 <head>
     <meta charset="utf-8" />
@@ -13,21 +13,10 @@
     <section class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container">
-                <nav class="level">
-                    <div class="level-left">
-                        <div class="level-item">
-                            <h1 class="title">
-                                Party time!
-                            </h1>
-                        </div>
-                    </div>
-                    <div sec:authorize="isAuthenticated()" class="level-right">
-                        <div class="level-item">
-                            <h2 style="font-size: 16px;">Signed in as <span sec:authentication="principal.username"></span></h2>
-                        </div>
-                    </div>
-                </nav>
 
+                <h1 class="title">
+                    Party time!
+                </h1>
             </div>
         </div>
     </section>
