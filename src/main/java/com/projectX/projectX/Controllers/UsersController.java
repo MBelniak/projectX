@@ -46,7 +46,7 @@ public class UsersController {
         }
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
         user.setRole(roleService.getRole("USER"));
-        userService.addUser(user);
+        userService.saveUser(user);
         return null;
     }
 }

@@ -2,11 +2,10 @@ package com.projectX.projectX.service;
 
 import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.repository.PartyRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,7 +33,7 @@ public class PartyServiceImpl implements PartyService {
     }
 
     @Override
-    public Party addParty(Party party) {
+    public Party saveParty(Party party) {
         return partyRepository.save(party);
     }
 

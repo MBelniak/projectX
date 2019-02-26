@@ -1,6 +1,7 @@
 package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.Party;
+import com.projectX.projectX.pojos.PartyPOJO;
 import com.projectX.projectX.service.ImageService;
 import com.projectX.projectX.service.PartyServiceImpl;
 import com.projectX.projectX.service.UserDetailsImpl;
@@ -8,7 +9,6 @@ import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -39,15 +39,15 @@ public class PartiesController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/parties")
-    public void addParty(@RequestBody Party party)
+    public void addParty(@RequestBody PartyPOJO partyPOJO)
     {
         UserDetailsImpl userDetails = (UserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if(party.getImage()!=null)
-            party.setImage(imageService.getImageEntity(party.getImage().getName()));
-
+        Party party = new Party(partyPOJO);
+        party.setImage(imageService.getImageEntity(partyPOJO.getImageName()));
         party.setOrganizer(userService.getUser(userDetails.getUsername()));
-        partyService.addParty(party);
+
+        partyService.saveParty(party);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/parties/{id}")

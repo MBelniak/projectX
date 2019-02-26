@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 
 @Service
@@ -49,7 +50,7 @@ public class ImageService {
         if(!file.isEmpty())
         {
             try {
-                if (!file.getContentType().split("/")[0].equals("image"))
+                if (!Objects.requireNonNull(file.getContentType()).split("/")[0].equals("image"))
                     return null;
             }
             catch (NullPointerException e)
@@ -57,8 +58,9 @@ public class ImageService {
                 return null;
             }
             Image image = new Image("temporaryName");
-            imageRepository.save(image);
+            saveImage(image);
             image.setName("partyImage("+image.getId()+")."+file.getContentType().split("/")[1]);
+            saveImage(image);
             Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, image.getName()), StandardCopyOption.REPLACE_EXISTING);
             return image.getName();
         }

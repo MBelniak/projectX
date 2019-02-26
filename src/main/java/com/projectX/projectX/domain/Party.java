@@ -1,7 +1,6 @@
 package com.projectX.projectX.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.projectX.projectX.pojos.PartyPOJO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,32 +41,25 @@ public class Party implements Serializable {
 
     public Party() {}
 
-    @JsonCreator
-    public Party(@JsonProperty("name") String name,@JsonProperty("description") String description,@JsonProperty("date") String date,
-                 @JsonProperty("time") String time,@JsonProperty("city") String city,@JsonProperty("address") String address,
-                 @JsonProperty("imageName") String imageName)
+    public Party(PartyPOJO party)
     {
-        this.name = name;
-        this.description = description;
+        this.name = party.getName();
+        this.description = party.getDescription();
         try {
-            this.date = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            this.date = new SimpleDateFormat("yyyy-MM-dd").parse(party.getDate());
         } catch (ParseException e) {
             this.date = null;
         }
         try {
-            this.time = new SimpleDateFormat("HH:mm").parse(time);
+            this.time = new SimpleDateFormat("HH:mm").parse(party.getTime());
         } catch (ParseException e) {
             this.time = null;
         }
-        this.city = city;
-        this.address = address;
-        if(imageName!=null) {
-            this.image = new Image(imageName);
-        }
-        else
-            this.image = null;
+        this.city = party.getCity();
+        this.address = party.getAddress();
         this.invitedUsers = new HashSet<>();
     }
+
 
     public void addInvitedUser(User user)
     {
