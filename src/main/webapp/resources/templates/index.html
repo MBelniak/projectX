@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pl" >
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8" />
@@ -12,11 +12,19 @@
 <body>
     <section class="hero is-primary is-bold">
         <div class="hero-body">
-            <div class="container">
-
-                <h1 class="title">
-                    Party time!
-                </h1>
+            <div class="container level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h1 class="title">
+                            Party time!
+                        </h1>
+                    </div>
+                </div>
+                <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
+                    <div th:fragment="principal" class="level-item">
+                        <h2>Signed in as <span th:text="${#authentication.getPrincipal().getUsername()}"></span></h2>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -31,14 +39,18 @@
             <h2>You can see all the upcoming events here:</h2>
             <h3> <a href="search_parties">Look through parties</a></h3>
         </div>
-        <div>
+        <div th:if="${#authorization.expression('!isAuthenticated()')}">
             <form action="/login">
                 <input type="submit" class="button is-primary" value="Sign in">
             </form>
-        </div>
-        <div>
             <form action="/register">
                 <input type="submit" class="button" value="Sign up">
+            </form>
+        </div>
+
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <form action="/logout">
+                <input type="submit" class="button is-primary" value="Sign out">
             </form>
         </div>
     </section>

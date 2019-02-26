@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UsersController {
@@ -40,9 +40,7 @@ public class UsersController {
     public  List<String> addUser(@RequestBody @Valid User user, BindingResult bindingResult) {
         if(bindingResult.hasErrors())
         {
-            List<String> errors = new ArrayList<>();
-            bindingResult.getAllErrors().forEach(e->errors.add(e.getDefaultMessage()));
-            return errors;
+            return bindingResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage()).collect(Collectors.toList());
         }
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
         user.setRole(roleService.getRole("USER"));
