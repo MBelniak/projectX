@@ -23,6 +23,9 @@
                 <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
                     <div th:fragment="principal" class="level-item">
                         <h2>Signed in as <span th:text="${#authentication.getPrincipal().getUsername()}"></span></h2>
+                        <form action="/logout">
+                            <input type="submit" class="button is-primary" value="Sign out"/>
+                        </form>
                     </div>
                 </div>
             </div>

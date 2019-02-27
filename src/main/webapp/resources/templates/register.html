@@ -12,8 +12,16 @@
 <body>
 <section class="hero is-primary is-bold">
     <div class="hero-body">
-        <div class="container">
+        <div class="container level">
+            <div class="level-left">
+                <div class="level-item">
             <h1 class="title">Sign up</h1>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
+                <div th:replace="index::principal">
+                </div>
+            </div>
         </div>
     </div>
 </section>

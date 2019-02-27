@@ -16,7 +16,8 @@
 .level{
     align-items: stretch;
 }
-.level-item{
+
+.divided {
     overflow: hidden;
     width:33%;
     max-width: none;

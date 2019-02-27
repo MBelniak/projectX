@@ -21,7 +21,7 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="level-right">
+                    <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
                         <div th:replace="index::principal">
                         </div>
                     </div>

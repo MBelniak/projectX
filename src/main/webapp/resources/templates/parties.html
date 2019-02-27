@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.springframework.org/schema/mvc">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -12,10 +12,18 @@
 <body>
     <section class="hero is-primary is-bold">
         <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Upcoming parties
-                </h1>
+            <div class="container level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h1 class="title">
+                            Upcoming parties
+                        </h1>
+                    </div>
+                </div>
+                <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
+                    <div th:replace="index::principal">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
