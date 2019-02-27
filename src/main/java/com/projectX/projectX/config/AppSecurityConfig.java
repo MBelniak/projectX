@@ -55,7 +55,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticated()
                     .antMatchers("/console", "/console/**")
                     .hasAnyAuthority("ADMIN")
-                    .antMatchers("/login", "/register", "/logout-success")
+                    .antMatchers("/login", "/register")
                     .not().authenticated()
                     .anyRequest()
                     .authenticated()
@@ -63,13 +63,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login")
                     .failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/?login=success")
                     .and()
                     .logout()
                     .invalidateHttpSession(true)
                     .clearAuthentication(true)
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/logout-success");
+                    .logoutSuccessUrl("/?logout=success");
     }
 
     @Override

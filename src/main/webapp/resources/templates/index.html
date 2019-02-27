@@ -31,6 +31,20 @@
             </div>
         </div>
     </section>
+    <section th:if="${#vars['flash.loginSuccessMessage']!=null}" class="hero is-info" style="opacity: 0.9;">
+        <div class="hero-body">
+            <div class="container" style="text-align: center">
+                <h2 th:text="${#vars['flash.loginSuccessMessage']}"></h2>
+            </div>
+        </div>
+    </section>
+    <section th:if="${#vars['flash.logoutSuccessMessage']!=null}" class="hero is-info" style="opacity: 0.9;">
+        <div class="hero-body">
+            <div class="container" style="text-align: center">
+                <h2 th:text="${#vars['flash.logoutSuccessMessage']}"></h2>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div>
             <h1>Arrange your party</h1>

@@ -50,24 +50,29 @@ public class StartController {
     @RequestMapping("/login")
     public String loginPage(@RequestParam Map<String, String> queryParameter, RedirectAttributes redirectAttributes)
     {
-        if(queryParameter.containsKey("register")) {
+        if (queryParameter.containsKey("register") && queryParameter.get("register").equals("ok")) {
             redirectAttributes.addFlashAttribute("flash.registerMessage", "Successfully signed up :)");
             return "redirect:login";
         }
         return "login";
     }
-
-    @RequestMapping("/logout-success")
-    public String logout()
-    {
-        return "logoutSuccess";
-    }
-
     @RequestMapping("/register")
     public String registerPage()
     {
         return "register";
     }
 
+    @RequestMapping("/")
+    public String indexPage(@RequestParam Map<String, String> queryParameter, RedirectAttributes redirectAttributes) {
+        if (queryParameter.containsKey("login") && queryParameter.get("login").equals("success")) {
+            redirectAttributes.addFlashAttribute("flash.loginSuccessMessage", "Successfully signed in.");
+            return "redirect:/";
+        }
+        if (queryParameter.containsKey("logout") && queryParameter.get("logout").equals("success")) {
+            redirectAttributes.addFlashAttribute("flash.logoutSuccessMessage", "Successfully signed out.");
+            return "redirect:/";
+        }
+        return "index";
+    }
 
 }
