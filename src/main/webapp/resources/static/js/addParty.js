@@ -1,10 +1,11 @@
-var requestJSON, warning;
 window.onload=function()
 {
     var file_input = document.querySelector("#image");
+    var file_error = $("#error_file");
+    setWarn = setWarn.bind($("#warning"));
     $("#send_button").click(function ()
     {
-            requestJSON = prepareJSON();
+        var requestJSON = prepareJSON();
             if(requestJSON==null)
             return;
 
@@ -21,16 +22,16 @@ window.onload=function()
                         processData: false,
                         contentType: false,
                         success: function(response){
-                            if(response=="") {
-                                $("#error_file").html("Error occured when tried to upload an image. \nPlease ensure that you're uploading an image.");
+                            if (response === "") {
+                                file_error.html("Error occured when tried to upload an image. \nPlease ensure that you're uploading an image.");
                                 file_input.value = "";
                                 return;
                             }
                             requestJSON.imageName = response;
-                            ajaxPostParty();
+                            ajaxPostParty(requestJSON);
                         },
                         error: function (error) {
-                            $("#error_file").html("Cannot upload a file: "+error.value+"\nYou can try with other file or post a party without an image.");
+                            file_error.html("Cannot upload a file: " + error.value + "\nYou can try with other file or post a party without an image.");
                             file_input.value = "";
                         }
                     }
@@ -42,7 +43,7 @@ window.onload=function()
                     return;
 
                 requestJSON.imageName = null;
-                ajaxPostParty();
+                ajaxPostParty(requestJSON);
             }
 
     });
@@ -53,10 +54,10 @@ window.onload=function()
         if($(this).hasClass("is-danger"))
             $(this).removeClass("is-danger");
     });
-    warning = $("#warning");
+
 };
 
-function ajaxPostParty() {
+function ajaxPostParty(requestJSON) {
     $.ajax(
         {   url: "/parties",
             type: "POST",
@@ -90,19 +91,19 @@ function prepareJSON() {
     if(obj.name == "")
     {
         name.addClass("is-danger");
-        setWarn();
+        setWarn(true);
         return null;
     }
     if(obj.description == "")
     {
         desc.addClass("is-danger");
-        setWarn();
+        setWarn(true);
         return null;
     }
     if(obj.date=="")
     {
         date.addClass("is-danger");
-        setWarn();
+        setWarn(true);
         return null;
     }
     if(obj.time=="")
@@ -114,20 +115,20 @@ function prepareJSON() {
     if(obj.city=="")
     {
         city.addClass("is-danger");
-        setWarn();
+        setWarn(true);
         return null;
     }
     if(obj.address=="")
     {
         address.addClass("is-danger");
-        setWarn();
+        setWarn(true);
         return null;
     }
-    warning.html("");
+    setWarn(false);
     return obj;
 }
 
-function setWarn() {
-    warning.html("Please fill in all required fields.");
+function setWarn(state) {
+    state === true ? this.html("Please fill in all required fields.") : this.html("");
 }
 

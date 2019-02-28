@@ -1,37 +1,23 @@
-var response;
 window.onload=function () {
 
-
+    var response;
     $.ajax('/parties', {
 
     }).then(function success(result) {
         response = result;
-        showParties();
-    }, function fail(error) {
-        alert("Error: "+error);
+        showParties(response);
+    }, function fail() {
+        $('.table').html("<td>Cannot fetch data from the server</td>");
 
     });
-    // $.ajax(
-    //     {
-    //         url: "/parties",
-    //         type: "GET",
-    //         dataType: "JSON",
-    //         success: function (result) {
-    //             response = result;
-    //             showParties();
-    //         },
-    //         error: function (error) {
-    //             alert("Error: "+error);
-    //         }
-    //     }
-    // );
+
     $("#main_page").click(function () {window.location.href="/";});
 };
 
-function showParties() {
+function showParties(response) {
     for(i = 0; i<response.length; i++)
     {
-         document.getElementById("table_body").innerHTML+='<tr><td><a href="/search_party/'+response[i]["id"]+'">'+response[i]["name"]+"</a></td><td>"+response[i]["date"]+
-             "</td><td>"+response[i]["city"]+", ul. "+response[i]["address"]+"</td></tr>";
+        $('#table_body').append('<tr><td><a href="/search_party/' + response[i]["id"] + '">' + response[i]["name"] + '</a></td><td>' + response[i]["date"] +
+            '</td><td>' + response[i]["city"] + ', ul. ' + response[i]["address"] + '</td></tr>');
     }
 }

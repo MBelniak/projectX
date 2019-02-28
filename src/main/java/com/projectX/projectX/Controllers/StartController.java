@@ -54,6 +54,10 @@ public class StartController {
             redirectAttributes.addFlashAttribute("flash.registerMessage", "Successfully signed up :)");
             return "redirect:login";
         }
+        if (queryParameter.containsKey("error") && queryParameter.get("error").equals("true")) {
+            redirectAttributes.addFlashAttribute("flash.errorMessage", "Username or password is incorrect.");
+            return "redirect:login";
+        }
         return "login";
     }
     @RequestMapping("/register")

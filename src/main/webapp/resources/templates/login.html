@@ -16,7 +16,7 @@
     </div>
 </section>
 
-<section th:if="${#vars['flash.errorMessage']!=null}" class="hero is-danger" style="opacity: 0.7;">
+<section th:if="${#vars['flash.errorMessage']!=null}" class="hero is-danger" style="opacity: 0.8;">
         <div class="hero-body">
             <div class="container" style="text-align: center">
                 <h2 th:text="${#vars['flash.errorMessage']}"></h2>
