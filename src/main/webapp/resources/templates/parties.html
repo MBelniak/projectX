@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/parties.css}"/>
     <script th:src="@{/js/parties.js}" type="text/javascript"></script>
     <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
     <title>PARTY TIME!</title>
@@ -29,11 +30,11 @@
     </section>
     <section class="section">
         <div class="container">
-            <table class="table is-hoverable is-fullwidth">
+            <table class="table is-hoverable is-striped is-fullwidth">
                 <thead>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Address</th>
+                <th id="th_name">Name</th>
+                <th id="th_date">Date, time</th>
+                <th id="th_address">Address</th>
                 </thead>
                 <tbody id="table_body">
                 </tbody>
