@@ -4,6 +4,7 @@ import com.projectX.projectX.domain.User;
 import com.projectX.projectX.service.RoleService;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,9 @@ import java.util.stream.Collectors;
 @RestController
 public class UsersController {
 
-    private UserService userService;
-    private RoleService roleService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Autowired
@@ -40,7 +41,7 @@ public class UsersController {
     public  List<String> addUser(@RequestBody @Valid User user, BindingResult bindingResult) {
         if(bindingResult.hasErrors())
         {
-            return bindingResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage()).collect(Collectors.toList());
+            return bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
         }
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
         user.setRole(roleService.getRole("USER"));

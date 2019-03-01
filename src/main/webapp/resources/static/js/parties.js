@@ -30,9 +30,10 @@ window.onload=function () {
 };
 
 function showParties(response) {
-    $('#table_body').empty();
-    for(i = 0; i<response.length; i++) {
-        $('#table_body').append('<tr><td><a href="/search_party/' + response[i]["id"] + '">' + response[i]["name"] + '</a></td><td>' + response[i]["date"] +
+    var table_body = $('#table_body');
+    table_body.empty();
+    for (var i = 0; i < response.length; i++) {
+        table_body.append('<tr><td><a href="/search_party/' + response[i]["id"] + '">' + response[i]["name"] + '</a></td><td>' + response[i]["date"] +
             ', ' + response[i]["time"] + '</td><td>' + response[i]["city"] + ', ul. ' + response[i]["address"] + '</td></tr>');
     }
 }

@@ -33,13 +33,13 @@
     </section>
     <div th:if="${party.image}!=null" class="image level">
         <div class="level-item divided">
-            <img class="left" th:src="@{'/images/' + ${party.image.name}}"/>
+            <img class="left" src="/images/partyImage(1).jpeg" th:src="@{'/images/' + ${party.image.name}}"/>
         </div>
         <div class="level-item divided">
-             <img class="center" th:src="@{'/images/' + ${party.image.name}}"/>
+            <img class="center" src="/images/partyImage(1).jpeg" th:src="@{'/images/' + ${party.image.name}}"/>
         </div>
         <div class="level-item divided">
-            <img class="right" th:src="@{'/images/' + ${party.image.name}}"/>
+            <img class="right" src="/images/partyImage(1).jpeg" th:src="@{'/images/' + ${party.image.name}}"/>
         </div>
     </div>
     <section class="section">

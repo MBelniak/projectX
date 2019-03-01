@@ -6,7 +6,7 @@ window.onload=function () {
     sign_up_button = $("#sign_up");
     sign_up_button.attr("disabled", true);
     email_input.bind('input', function () {
-        if(email_input.val()==="" || email_input.val().match(/[;?=+/\\"']+/g))
+            if (email_input.val() == "" || email_input.val().match(/[;?=+/\\"']+/g))
         {
             sign_up_button.attr("disabled", true);
             return;
@@ -45,12 +45,12 @@ window.onload=function () {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(requestJSON),
             success: function (response) {
-                if(response=="")
+                if (response == "")
                     window.location.href='/login?register=ok';
                 else
                 {
                     warning.html("Error: ");
-                    for(i = 0; i<response.length; i++)
+                    for (var i = 0; i < response.length; i++)
                         warning.append("<p>"+response[i]+"</p>");
                 }
             },

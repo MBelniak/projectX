@@ -27,10 +27,10 @@ public class User {
     @Length(min = 8, message = "Password has to be at least 8 char. long.")
     private String hash_password;
     @NotNull(message = "Please fill in 'first name' field.")
-    @Pattern(regexp = "[\\p{L}]+$")
+    @Pattern(regexp = "[\\p{L}]+$", message = "First name must only match literals")
     private String first_name;
     @NotNull(message = "Please fill in 'surname' field.")
-    @Pattern(regexp = "[\\p{L}]+$")
+    @Pattern(regexp = "[\\p{L}]+$", message = "Surname must only match literals")
     private String surname;
     @ManyToOne
     private Role role;
@@ -38,10 +38,6 @@ public class User {
     private Set<Party> attended_parties;
 
     public User() {
-    }
-
-    public User(String email) {
-        this.email = email;
     }
 
     @JsonCreator

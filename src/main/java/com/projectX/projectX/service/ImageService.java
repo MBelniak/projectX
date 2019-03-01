@@ -42,7 +42,7 @@ public class ImageService {
         return imageRepository.findByName(name);
     }
 
-    public void saveImage(Image image)
+    private void saveImage(Image image)
     {
         imageRepository.save(image);
     }

@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PartyPOJO {
-    private String name;
-    private String description;
-    private String date;
-    private String time;
-    private String city;
-    private String address;
-    private String imageName;
+    private final String name;
+    private final String description;
+    private final String date;
+    private final String time;
+    private final String city;
+    private final String address;
+    private final String imageName;
 
     @JsonCreator
     public PartyPOJO(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("date") String date,

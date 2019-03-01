@@ -6,7 +6,7 @@ window.onload=function()
     $("#send_button").click(function ()
     {
         var requestJSON = prepareJSON();
-            if(requestJSON==null)
+        if (requestJSON == null)
             return;
 
             var formData = new FormData();
@@ -22,7 +22,7 @@ window.onload=function()
                         processData: false,
                         contentType: false,
                         success: function(response){
-                            if (response === "") {
+                            if (response == "") {
                                 file_error.html("Error occured when tried to upload an image. \nPlease ensure that you're uploading an image.");
                                 file_input.value = "";
                                 return;
@@ -39,7 +39,7 @@ window.onload=function()
             }
             else {
                 requestJSON = prepareJSON();
-                if(requestJSON==null)
+                if (requestJSON == null)
                     return;
 
                 requestJSON.imageName = null;
@@ -100,25 +100,25 @@ function prepareJSON() {
         setWarn(true);
         return null;
     }
-    if(obj.date=="")
+    if (obj.date == "")
     {
         date.addClass("is-danger");
         setWarn(true);
         return null;
     }
-    if(obj.time=="")
+    if (obj.time == "")
     {
         time.addClass("is-danger");
         setWarn();
         return null;
     }
-    if(obj.city=="")
+    if (obj.city == "")
     {
         city.addClass("is-danger");
         setWarn(true);
         return null;
     }
-    if(obj.address=="")
+    if (obj.address == "")
     {
         address.addClass("is-danger");
         setWarn(true);
