@@ -1,5 +1,5 @@
-var response = null;
 window.onload=function () {
+    var response;
     $.ajax('/parties', {}).then(function success(result) {
         response = result;
         showParties(response);

@@ -1,9 +1,8 @@
-var sign_up_button, requestJSON, email_input, warning;
 window.onload=function () {
 
-    warning = $("#warning");
-    email_input = $("#email");
-    sign_up_button = $("#sign_up");
+    var warning = $("#warning");
+    var email_input = $("#email");
+    var sign_up_button = $("#sign_up");
     sign_up_button.attr("disabled", true);
     email_input.bind('input', function () {
             if (email_input.val() == "" || email_input.val().match(/[;?=+/\\"']+/g))
@@ -35,7 +34,7 @@ window.onload=function () {
 
     sign_up_button.click(function () {
 
-        requestJSON = prepareJSON();
+        var requestJSON = prepareJSON();
         if(requestJSON==null)
             return;
         $.ajax(
@@ -55,7 +54,7 @@ window.onload=function () {
                 }
             },
             error: function (error) {
-                    warning.html("Error "+ error.status+" - "+error.status);
+                warning.html("Error " + error.code + " - " + error.status);
             }
 
         })

@@ -67,7 +67,7 @@ function ajaxPostParty(requestJSON) {
                 window.location.href='/party_added';
             },
             error:function (error) {
-                alert("Cannot add party: "+error);
+                alert("Cannot add party: " + error.value);
             }
         });
 }
