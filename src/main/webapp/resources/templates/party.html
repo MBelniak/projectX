@@ -31,6 +31,7 @@
             </div>
         </div>
     </section>
+
     <div th:if="${party.image}!=null" class="image level">
         <div class="level-item divided">
             <img class="left" src="/images/partyImage(1).jpeg" th:src="@{'/images/' + ${party.image.name}}"/>
@@ -52,6 +53,11 @@
             <h2 class="limited" th:text="${party.city} + ', ul. ' + ${party.address}"></h2><br/>
             <h3 class="limited">Party arranged by <span
                     th:text="${party.organizer.first_name}+' '+${party.organizer.surname}"></span></h3><br/>
+            <h3 class="limited">This party is
+                <span th:if="${party.priv}"
+                      th:text="private."></span>
+                <span th:unless="${party.priv}"
+                      th:text="public."></span></h3><br/>
             <button class="button is-primary" id="back">Back</button>
             <button class="button" id="main_page">Main Page</button>
         </div>

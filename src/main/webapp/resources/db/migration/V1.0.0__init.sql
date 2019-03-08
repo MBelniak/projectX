@@ -1,13 +1,14 @@
 CREATE TABLE PARTY(
-  id INT PRIMARY KEY,
-  name VARCHAR2(100),
-  description VARCHAR2(100),
-  date DATE,
-  time TIME,
-  city VARCHAR2(100),
-  address VARCHAR2(100),
-  image_id INT,
-  user_id INT
+  id           INT PRIMARY KEY,
+  name         VARCHAR2(100),
+  description  VARCHAR2(100),
+  date         DATE,
+  time         TIME,
+  city         VARCHAR2(100),
+  address      VARCHAR2(100),
+  priv         BOOLEAN,
+  image_id     INT,
+  organizer_id INT
 );
 
 CREATE TABLE IMAGE
@@ -42,7 +43,7 @@ ALTER TABLE PARTY
     ADD FOREIGN KEY (image_id) references IMAGE(id);
 
 ALTER TABLE PARTY
-    ADD FOREIGN KEY (user_id) references USER(id);
+  ADD FOREIGN KEY (organizer_id) references USER (id);
 
 ALTER TABLE USER
     ADD FOREIGN KEY (role_id) references ROLE(id);

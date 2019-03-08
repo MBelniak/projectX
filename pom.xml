@@ -6,7 +6,10 @@
     <groupId>com.projectX</groupId>
     <artifactId>projectX</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <modules>
+        <module>front-angular</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <name>projectX</name>
     <description>Demo project for Spring Boot</description>

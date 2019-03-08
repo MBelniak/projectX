@@ -11,10 +11,11 @@ public class PartyPOJO {
     private final String city;
     private final String address;
     private final String imageName;
+    private final boolean priv;
 
     @JsonCreator
     public PartyPOJO(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("date") String date,
-                     @JsonProperty("time") String time, @JsonProperty("city") String city, @JsonProperty("address") String address,
+                     @JsonProperty("time") String time, @JsonProperty("city") String city, @JsonProperty("address") String address, @JsonProperty("priv") boolean priv,
                      @JsonProperty("imageName") String imageName) {
         this.name = name;
         this.description = description;
@@ -22,6 +23,7 @@ public class PartyPOJO {
         this.time = time;
         this.city = city;
         this.address = address;
+        this.priv = priv;
         this.imageName = imageName;
     }
 
@@ -51,5 +53,9 @@ public class PartyPOJO {
 
     public String getImageName() {
         return imageName;
+    }
+
+    public boolean isPriv() {
+        return priv;
     }
 }

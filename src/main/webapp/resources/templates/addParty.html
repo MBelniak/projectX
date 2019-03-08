@@ -39,11 +39,15 @@
             <span style="color: #f00; font-size: 12px;">*</span>Description:<br/>
             <textarea class="textarea listened" id="description" placeholder="e.g Let's celebrate the occasion!"></textarea><br/>
             <span style="color: #f00; font-size: 12px;">*</span>Date and time:<br/>
-            <input type="date" class="listened" id="date"/><input type="time" class="listened" id="time"/><br/>
+            <input type="date" class="listened" id="date"/><input type="time" class="listened" id="time"/><br/><br/>
             <span style="color: #f00; font-size: 12px;">*</span>City:<br/>
             <textarea class="input listened" id="city" placeholder="e.g. Warsaw"></textarea><br/>
             <span style="color: #f00; font-size: 12px;">*</span>Address:<br/>
             <textarea class="input listened" id="address" placeholder="e.g. Waszyngtona 2/12"></textarea><br/>
+            Visibility: <select id="private">
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+        </select> Private parties will be visible only for invited users.<br/><br/>
             Add image to the party:<br/>
             <input type="file" id="image"/><p id="error_file"></p><br/>
             <button class="button is-primary" id="send_button">Add</button>

@@ -78,6 +78,7 @@ function prepareJSON() {
     var time = $("#time");
     var city = $("#city");
     var address = $("#address");
+    var priv = $("#private option:selected");
 
     var obj = {};
     obj.name = name.val();
@@ -86,6 +87,7 @@ function prepareJSON() {
     obj.time = time.val();
     obj.city = city.val();
     obj.address = address.val();
+    obj.priv = (priv.val() == 'private');
     obj.imageName="";
 
     if(obj.name == "")

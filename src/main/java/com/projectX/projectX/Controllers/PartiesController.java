@@ -1,6 +1,7 @@
 package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.Party;
+import com.projectX.projectX.domain.User;
 import com.projectX.projectX.pojos.PartyPOJO;
 import com.projectX.projectX.service.ImageService;
 import com.projectX.projectX.service.PartyServiceImpl;
@@ -11,6 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 public class PartiesController {
@@ -18,6 +21,7 @@ public class PartiesController {
     private final PartyServiceImpl partyService;
     private final ImageService imageService;
     private final UserService userService;
+    private UserDetailsImpl userDetails;
 
     @Autowired
     public PartiesController(PartyServiceImpl partyService, ImageService imageService, UserService userService) {
@@ -29,24 +33,52 @@ public class PartiesController {
     @RequestMapping("/parties")
     public List<Party> getParties()
     {
-        return partyService.getAll();
+        userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return partyService.getAll()
+                .stream()
+                .filter(party -> !party.isPriv() || party.getInvitedUsers().stream().anyMatch(user -> user.getEmail().equals(userDetails.getUsername())))
+                .collect(Collectors.toList());
     }
 
     @RequestMapping("/parties/{id}")
     public Party getParty(@PathVariable Long id)
     {
-        return partyService.getParty(id);
+        Party result = partyService.getParty(id);
+        if (result.isPriv()) {
+            userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (result.getInvitedUsers()
+                    .stream()
+                    .anyMatch(user -> user.getEmail().equals(userDetails.getUsername())))
+                return result;
+            else
+                return null;
+        }
+        return result;
+    }
+
+    @RequestMapping("/parties/{id}/guests")
+    public Set<User> getGuests(@PathVariable Long id) {
+        Party party = partyService.getParty(id);
+        if (party.isPriv()) {
+            userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (party.getInvitedUsers()
+                    .stream()
+                    .anyMatch(user -> user.getEmail().equals(userDetails.getUsername())))
+                return party.getInvitedUsers();
+            else
+                return null;
+        }
+        return party.getInvitedUsers();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/parties")
     public void addParty(@RequestBody PartyPOJO partyPOJO)
     {
-        UserDetailsImpl userDetails = (UserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Party party = new Party(partyPOJO);
         party.setImage(imageService.getImageEntity(partyPOJO.getImageName()));
         party.setOrganizer(userService.getUser(userDetails.getUsername()));
-
         partyService.saveParty(party);
     }
 

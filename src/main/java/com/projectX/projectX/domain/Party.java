@@ -24,6 +24,7 @@ public class Party implements Serializable {
     private Date time;
     private String city;
     private String address;
+    private boolean priv;
     @OneToOne
     private Image image;
     @ManyToOne
@@ -58,6 +59,7 @@ public class Party implements Serializable {
         this.city = party.getCity();
         this.address = party.getAddress();
         this.invitedUsers = new HashSet<>();
+        this.priv = party.isPriv();
     }
 
 
@@ -142,11 +144,25 @@ public class Party implements Serializable {
     }
 
     public void setOrganizer(User organizer) {
+
         this.organizer = organizer;
+        addInvitedUser(organizer);
     }
 
     public Set<User> getInvitedUsers() {
-        return invitedUsers;
+        return new HashSet<>(invitedUsers);
+    }
+
+    public void addInvitedUsers(Set<User> users) {
+        invitedUsers.addAll(users);
+    }
+
+    public boolean isPriv() {
+        return priv;
+    }
+
+    public void setPriv(boolean priv) {
+        this.priv = priv;
     }
 
     public void setInvitedUsers(Set<User> invitedUsers) {

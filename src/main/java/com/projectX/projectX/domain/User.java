@@ -1,5 +1,6 @@
 package com.projectX.projectX.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
@@ -35,6 +36,7 @@ public class User {
     @ManyToOne
     private Role role;
     @ManyToMany(mappedBy = "invitedUsers")
+    @JsonIgnore
     private Set<Party> attended_parties;
 
     public User() {

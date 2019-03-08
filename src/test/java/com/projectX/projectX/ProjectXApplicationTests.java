@@ -11,7 +11,6 @@ public class ProjectXApplicationTests {
 
 	@Test
 	public void contextLoads() {
-
     }
 
 }

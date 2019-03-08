@@ -1,7 +1,10 @@
 package com.projectX.projectX.Controllers;
 
+import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.service.PartyService;
+import com.projectX.projectX.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +40,19 @@ public class StartController {
     @RequestMapping("/search_party/{id}")
     public String partyPage(Model model, @PathVariable Long id)
     {
-        model.addAttribute("party", partyService.getParty(id));
+
+        Party party = partyService.getParty(id);
+        if (party == null)
+            return "parties";
+        if (party.isPriv()) {
+            UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (party.getInvitedUsers()
+                    .stream()
+                    .anyMatch(user -> user.getEmail().equals(userDetails.getUsername())))
+                model.addAttribute("party", party);
+        } else
+            model.addAttribute("party", party);
+
         return "party";
     }
 
