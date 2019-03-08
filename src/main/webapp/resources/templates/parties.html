@@ -28,6 +28,13 @@
             </div>
         </div>
     </section>
+    <section th:if="${#vars['message']!=null}" class="hero is-info">
+        <div class="hero-body">
+            <div class="container">
+                <p style="text-align: center;" th:text="${#vars['message']}"></p>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div class="container">
             <table class="table is-hoverable is-striped is-fullwidth">

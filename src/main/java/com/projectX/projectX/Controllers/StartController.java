@@ -38,18 +38,25 @@ public class StartController {
     }
 
     @RequestMapping("/search_party/{id}")
-    public String partyPage(Model model, @PathVariable Long id)
+    public String partyPage(Model model, @PathVariable Long id, RedirectAttributes attributes)
     {
 
         Party party = partyService.getParty(id);
-        if (party == null)
-            return "parties";
+        if (party == null) {
+            attributes.addFlashAttribute("message", "Couldn't find what you are looking for.");
+            return "redirect:/search_parties";
+        }
         if (party.isPriv()) {
             UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (party.getInvitedUsers()
                     .stream()
                     .anyMatch(user -> user.getEmail().equals(userDetails.getUsername())))
                 model.addAttribute("party", party);
+            else {
+                model.addAttribute("error_message", "Permission denied.");
+                return "party";
+            }
+
         } else
             model.addAttribute("party", party);
 
