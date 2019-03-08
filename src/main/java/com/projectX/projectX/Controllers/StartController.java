@@ -3,6 +3,7 @@ package com.projectX.projectX.Controllers;
 import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.service.PartyService;
 import com.projectX.projectX.service.UserDetailsImpl;
+import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ import java.util.Map;
 public class StartController {
 
     private final PartyService partyService;
+    private final UserService userService;
 
     @Autowired
-    public StartController(PartyService partyService) {
+    public StartController(PartyService partyService, UserService userService) {
+        this.userService = userService;
         this.partyService = partyService;
     }
 
@@ -99,6 +102,13 @@ public class StartController {
             return "redirect:/";
         }
         return "index";
+    }
+
+    @RequestMapping("/user_details")
+    public String getUserPage(Model model) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", userService.getUser(userDetails.getUsername()));
+        return "user";
     }
 
 }

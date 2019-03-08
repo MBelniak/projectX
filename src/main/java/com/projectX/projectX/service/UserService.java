@@ -30,6 +30,10 @@ public class UserService {
         return userRepository.findUserByEmail(email);
     }
 
+    public User getUser(Long id) {
+        return userRepository.findUserById(id);
+    }
+
     public void saveUser(User user)
     {
         userRepository.save(user);

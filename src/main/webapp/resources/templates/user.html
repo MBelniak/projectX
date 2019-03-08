@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <title>USER DETAILS</title>
+</head>
+<body>
+<section class="hero is-primary is-bold">
+    <div class="hero-body">
+        <div class="container level">
+            <div class="level-left">
+                <div class="level-item">
+                    <h1 class="title">
+                        Profile details
+                    </h1>
+                </div>
+            </div>
+            <div th:if="${#authorization.expression('isAuthenticated()')}" class="level-right">
+                <div th:replace="index::principal">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <span th:text="${user.first_name}+' '+${user.surname}"></span>
+</section>
+</body>
+</html>
