@@ -37,16 +37,31 @@
     </section>
     <section class="section">
         <div class="container">
-            <table class="table is-hoverable is-striped is-fullwidth">
+            <h1 class="title" style="text-align: left; color: #222222;">Private parties</h1>
+            <table id="private" class="table is-hoverable is-striped is-fullwidth">
                 <thead>
-                <th id="th_name">Name</th>
-                <th id="th_date">Date, time</th>
-                <th id="th_address">Address</th>
+                <th id="th_name_priv">Name</th>
+                <th id="th_date_priv">Date, time</th>
+                <th id="th_address_priv">Address</th>
                 </thead>
-                <tbody id="table_body">
+                <tbody id="table_body_priv">
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <div class="container">
+            <h1 class="title" style="text-align: left; color: #222222">Public parties</h1>
+            <table id="public" class="table is-hoverable is-striped is-fullwidth">
+                <thead>
+                <th id="th_name_pub">Name</th>
+                <th id="th_date_pub">Date, time</th>
+                <th id="th_address_pub">Address</th>
+                </thead>
+                <tbody id="table_body_pub">
                 </tbody>
             </table>
             <button class="button is-primary" id="main_page">Main page</button>
+            <button class="button" id="back">Back</button>
         </div>
     </section>
 </body>

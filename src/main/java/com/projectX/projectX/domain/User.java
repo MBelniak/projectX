@@ -10,6 +10,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +36,9 @@ public class User {
     @NotNull(message = "Please fill in 'surname' field.")
     @Pattern(regexp = "[\\p{L}]+$", message = "Surname must only match literals")
     private String surname;
+    @Temporal(TemporalType.DATE)
+    @NotNull(message = "Please fill in 'date_of_birth' field.")
+    private Date date_of_birth;
     @ManyToOne
     private Role role;
     @ManyToMany(mappedBy = "invitedUsers")
@@ -43,13 +49,18 @@ public class User {
     }
 
     @JsonCreator
-    public User(@JsonProperty("password") String hash_password,@JsonProperty("first_name") String first_name,
-                @JsonProperty("surname") String surname, @JsonProperty("email") String email) {
+    public User(@JsonProperty("password") String hash_password, @JsonProperty("first_name") String first_name,
+                @JsonProperty("surname") String surname, @JsonProperty("email") String email, @JsonProperty("date_of_birth") String date_of_birth) {
         this.hash_password = hash_password;
         this.first_name = first_name;
         this.surname = surname;
         this.email = email;
         this.attended_parties = new HashSet<>();
+        try {
+            this.date_of_birth = new SimpleDateFormat("yyyy-MM-dd").parse(date_of_birth);
+        } catch (ParseException e) {
+            this.date_of_birth = null;
+        }
     }
 
     public Long getId() {
@@ -98,6 +109,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 
     public Set<Party> getAttended_parties() {

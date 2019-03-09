@@ -59,8 +59,9 @@ window.onload=function () {
 
         })
     });
-    $('#back').click(function () {
-        window.location.href="/";
+    $("#back").click(function () {
+        history.go(-1);
+        return false;
     });
 };
 

@@ -1,6 +1,7 @@
 package com.projectX.projectX.Controllers;
 
 import com.projectX.projectX.domain.User;
+import com.projectX.projectX.pojos.UserPOJO;
 import com.projectX.projectX.service.RoleService;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,15 @@ public class UsersController {
         user.setHash_password(bCryptPasswordEncoder.encode(user.getHash_password()));
         user.setRole(roleService.getRole("USER"));
         userService.saveUser(user);
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users")
+    public List<String> updateUser(@RequestBody @Valid UserPOJO user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+        }
+        userService.updateUser(userService.getUser(user.getEmail()), user);
         return null;
     }
 }

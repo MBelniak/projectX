@@ -19,12 +19,13 @@ CREATE TABLE IMAGE
 
 CREATE TABLE USER
 (
-  id INT PRIMARY KEY auto_increment,
-  email VARCHAR2(80),
+  id            INT PRIMARY KEY auto_increment,
+  email         VARCHAR2(80),
   hash_password VARCHAR2(500),
-  first_name VARCHAR2(100),
-  surname VARCHAR2(100),
-  role_id INT
+  first_name    VARCHAR2(100),
+  surname       VARCHAR2(100),
+  date_of_birth DATE,
+  role_id       INT
 );
 
 CREATE TABLE ROLE

@@ -1,7 +1,8 @@
 window.onload= function () {
 
     $("#back").click(function () {
-        window.location.href = "/search_parties";
+        history.go(-1);
+        return false;
     });
     $("#main_page").click(function () {
         window.location.href = "/";
