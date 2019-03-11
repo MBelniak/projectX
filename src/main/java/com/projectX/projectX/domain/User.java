@@ -1,7 +1,8 @@
 package com.projectX.projectX.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.projectX.projectX.util.CustomItemSerializer;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 @Entity
 @Validated
+@JsonSerialize(using = CustomItemSerializer.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,6 @@ public class User {
     @ManyToOne
     private Role role;
     @ManyToMany(mappedBy = "invitedUsers")
-    @JsonIgnore
     private Set<Party> attended_parties;
 
     public User() {
