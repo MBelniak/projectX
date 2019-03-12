@@ -70,7 +70,7 @@ function prepareJSON() {
     var first_name = $("#first_name");
     var surname = $("#surname");
     var password = $("#password");
-    var date = $('#date');
+    var date = $('#birth');
 
     var obj = {};
     obj.email = email.val();
