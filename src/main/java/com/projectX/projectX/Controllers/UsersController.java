@@ -3,9 +3,11 @@ package com.projectX.projectX.Controllers;
 import com.projectX.projectX.domain.User;
 import com.projectX.projectX.pojos.UserPOJO;
 import com.projectX.projectX.service.RoleService;
+import com.projectX.projectX.service.UserDetailsImpl;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +38,12 @@ public class UsersController {
         if(userService.getUser(email)!=null)
             return "exists";
         return null;
+    }
+
+    @RequestMapping("/user_id")
+    public Long getCurrentUserId() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getId();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
