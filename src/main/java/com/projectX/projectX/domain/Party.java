@@ -144,7 +144,6 @@ public class Party implements Serializable {
     }
 
     public void setOrganizer(User organizer) {
-
         this.organizer = organizer;
         addInvitedUser(organizer);
     }
@@ -154,7 +153,7 @@ public class Party implements Serializable {
     }
 
     public void addInvitedUsers(Set<User> users) {
-        invitedUsers.addAll(users);
+        users.forEach(this::addInvitedUser);
     }
 
     public boolean isPriv() {
@@ -166,6 +165,7 @@ public class Party implements Serializable {
     }
 
     public void setInvitedUsers(Set<User> invitedUsers) {
-        this.invitedUsers = invitedUsers;
+        this.invitedUsers.clear();
+        invitedUsers.forEach(this::addInvitedUser);
     }
 }

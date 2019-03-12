@@ -125,6 +125,7 @@ public class User {
     }
 
     public void setAttended_parties(Set<Party> attended_parties) {
+        attended_parties.forEach(party -> party.getInvitedUsers().add(this));
         this.attended_parties = attended_parties;
     }
 }
