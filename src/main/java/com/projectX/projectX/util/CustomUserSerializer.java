@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomItemSerializer extends StdSerializer<User> {
+public class CustomUserSerializer extends StdSerializer<User> {
 
-    public CustomItemSerializer() {
+    public CustomUserSerializer() {
         this(null);
     }
 
-    public CustomItemSerializer(Class<User> t) {
+    public CustomUserSerializer(Class<User> t) {
         super(t);
     }
 
@@ -25,18 +25,16 @@ public class CustomItemSerializer extends StdSerializer<User> {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeNumberField("id", user.getId());
         jsonGenerator.writeStringField("email", user.getEmail());
-        jsonGenerator.writeStringField("hash_password", user.getHash_password());
         jsonGenerator.writeStringField("first_name", user.getFirst_name());
         jsonGenerator.writeStringField("surname", user.getSurname());
         jsonGenerator.writeStringField("date_of_birth", user.getDate_of_birth().toString());
-        jsonGenerator.writeArrayFieldStart("attended_parties");
+        jsonGenerator.writeFieldName("attended_parties");
         int[] partiesIds = new int[user.getAttended_parties().size()];
         List<Party> parties = new ArrayList<>(user.getAttended_parties());
         for (int i = 0; i < parties.size(); i++) {
             partiesIds[i] = parties.get(i).getId().intValue();
         }
         jsonGenerator.writeArray(partiesIds, 0, partiesIds.length);
-        jsonGenerator.writeEndArray();
         jsonGenerator.writeEndObject();
     }
 }

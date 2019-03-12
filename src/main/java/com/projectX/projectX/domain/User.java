@@ -2,7 +2,7 @@ package com.projectX.projectX.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.projectX.projectX.util.CustomItemSerializer;
+import com.projectX.projectX.util.CustomUserSerializer;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Validated
-@JsonSerialize(using = CustomItemSerializer.class)
+@JsonSerialize(using = CustomUserSerializer.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
