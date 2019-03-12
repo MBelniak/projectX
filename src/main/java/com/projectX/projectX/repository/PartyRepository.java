@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PartyRepository extends PagingAndSortingRepository<Party, Long> {
+    Iterable<Party> getPartiesByOrganizerId(Long userId);
 }

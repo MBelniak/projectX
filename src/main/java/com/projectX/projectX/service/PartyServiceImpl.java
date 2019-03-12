@@ -41,4 +41,9 @@ public class PartyServiceImpl implements PartyService {
     public Party updateParty(Party party, Long id) {
         return partyRepository.save(party);
     }
+
+    @Override
+    public Iterable<Party> getPartiesOrganizedBy(Long userId) {
+        return partyRepository.getPartiesByOrganizerId(userId);
+    }
 }
