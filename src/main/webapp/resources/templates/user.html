@@ -28,30 +28,43 @@
     </div>
 </section>
 <section class="section">
-    <div style="max-width: 500px; margin: 0 auto; align-content: left;">
-        <label class="label">Email:</label>
-        <p id="email" th:text="${user.email}"></p><br/>
-        <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>First name:</label>
-        <input class="hideable input" id="first_name_input" th:value="${user.first_name}"/>
-        <p id="first_name" class="info" th:text="${user.first_name}"></p><br/>
-        <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>Surname:</label>
-        <input class="hideable input" id="surname_input" th:value="${user.surname}"/>
-        <p id="surname" class="info" th:text="${user.surname}"></p><br/>
-        <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>Date of birth:</label>
-        <input class="hideable" type="date" id="birth_input" th:value="${user.date_of_birth}"/>
-        <p class="info" id="birth" th:text="${user.date_of_birth}"></p><br/><br/>
-        <button id="edit" class="info button is-primary">
-            Edit
-        </button>
-        <button id="save_button" class="hideable button is-success">
-             <span class="icon is-small">
-                <i class="fas fa-check"></i>
-             </span>
-            <span>Save</span>
-        </button>
-        <button class="hideable button" id="cancel">Cancel</button>
-        <button class="button" id="back">Back</button>
-        <p id="warning"></p>
+    <div class="columns">
+        <div class="column">
+            <label class="label">Email:</label>
+            <p id="email" th:text="${user.email}"></p><br/>
+            <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>First
+                name:</label>
+            <input class="hideable input" id="first_name_input" th:value="${user.first_name}"/>
+            <p id="first_name" class="info" th:text="${user.first_name}"></p><br/>
+            <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>Surname:</label>
+            <input class="hideable input" id="surname_input" th:value="${user.surname}"/>
+            <p id="surname" class="info" th:text="${user.surname}"></p><br/>
+            <label class="label"><span class="hideable" style="color: #f00; font-size: 12px;">*</span>Date of
+                birth:</label>
+            <input class="hideable" type="date" id="birth_input" th:value="${user.date_of_birth}"/>
+            <p class="info" id="birth" th:text="${user.date_of_birth}"></p><br/><br/>
+            <button id="edit" class="info button is-primary">
+                Edit
+            </button>
+            <button id="save_button" class="hideable button is-success">
+                 <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                 </span>
+                <span>Save</span>
+            </button>
+            <button class="hideable button" id="cancel">Cancel</button>
+            <button class="button" id="back">Back</button>
+            <button class="button" id="main">Main page</button>
+            <p id="warning"></p>
+        </div>
+        <div class="column">
+            <table class="table is-hoverable is-striped">
+                <tr>
+                    <th>My parties</th>
+                </tr>
+                <tbody id="parties_table"></tbody>
+            </table>
+        </div>
     </div>
 </section>
 </body>

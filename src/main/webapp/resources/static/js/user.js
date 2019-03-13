@@ -1,11 +1,23 @@
 window.onload = function () {
+    var user_parties;
     var hideable = $(".hideable");
     var info = $(".info");
     var warning = $("#warning");
     hideable.hide();
+    var table_body = $('#parties_table');
+    $.ajax('/current_user/organized_parties', {}).then(function success(response) {
+        user_parties = response;
+        showParties(user_parties, table_body);
+    }, function fail() {
+        table_body.html("Cannot fetch data from the server");
+    });
+
     $("#back").click(function () {
         history.go(-1);
         return false;
+    });
+    $('#main').click(function () {
+        window.location.href = "/";
     });
     $("#edit").click(function () {
         hideable.show();
@@ -56,4 +68,10 @@ function updateInfo(userPOJO) {
     $("#first_name").text(userPOJO.first_name);
     $("#surname").text(userPOJO.surname);
     $("#birth").text(userPOJO.date_of_birth);
+}
+
+function showParties(parties, table) {
+    parties.forEach(function (party) {
+        table.append("<tr><td><a href='/search_parties/" + party['id'] + "'>" + party["name"] + "</a></td></tr>");
+    });
 }

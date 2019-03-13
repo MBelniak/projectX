@@ -46,4 +46,5 @@ public class UserService {
         user.setDate_of_birth(userPOJO.getDate_of_birth());
         userRepository.save(user);
     }
+
 }

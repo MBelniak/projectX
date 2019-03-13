@@ -40,7 +40,7 @@ public class StartController {
         return "parties";
     }
 
-    @RequestMapping("/search_party/{id}")
+    @RequestMapping("/search_parties/{id}")
     public String partyPage(Model model, @PathVariable Long id, RedirectAttributes attributes)
     {
 

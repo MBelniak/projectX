@@ -13,7 +13,7 @@ window.onload=function () {
             return party["priv"];
         });
 
-        $.ajax('user_id', {}).then(
+        $.ajax('current_user/id', {}).then(
             function success(id) {
                 current_user_ID = id;
                 console.log(id);
@@ -84,7 +84,7 @@ function showParties(parties, table) {
     table.empty();
     var table_data;
     for (var i = 0; i < parties.length; i++) {
-        table_data = '<tr><td><a href="/search_party/' + parties[i]["id"] + '">' + parties[i]["name"] + '</a></td><td>' + parties[i]["date"] +
+        table_data = '<tr><td><a href="/search_parties/' + parties[i]["id"] + '">' + parties[i]["name"] + '</a></td><td>' + parties[i]["date"] +
             ', ' + parties[i]["time"] + '</td><td>' + parties[i]["city"] + ', ul. ' + parties[i]["address"] + '</td>';
 
         if (!parties[i]["priv"])
@@ -128,7 +128,7 @@ function addInvitationCheck(parties, userID) {
     });
     for (var i = 0; i < parties.length; i++) {
         if (parties[i]["invitedUsers"].some(function (user) {
-            return user["id"] == userID
+            return user["id"] == userID;
         }))
             parties[i].userInvited = true;
     }

@@ -22,6 +22,7 @@ public class UsersController {
     private final UserService userService;
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserDetailsImpl userDetails;
 
 
     @Autowired
@@ -40,9 +41,9 @@ public class UsersController {
         return null;
     }
 
-    @RequestMapping("/user_id")
+    @RequestMapping("/current_user/id")
     public Long getCurrentUserId() {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userDetails.getId();
     }
 

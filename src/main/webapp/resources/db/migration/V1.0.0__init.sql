@@ -1,7 +1,7 @@
 CREATE TABLE PARTY(
   id           INT PRIMARY KEY,
   name         VARCHAR2(100),
-  description  VARCHAR2(100),
+  description  VARCHAR2(1000),
   date         DATE,
   time         TIME,
   city         VARCHAR2(100),
@@ -20,7 +20,7 @@ CREATE TABLE IMAGE
 CREATE TABLE USER
 (
   id            INT PRIMARY KEY auto_increment,
-  email         VARCHAR2(80),
+  email         VARCHAR2(100),
   hash_password VARCHAR2(500),
   first_name    VARCHAR2(100),
   surname       VARCHAR2(100),

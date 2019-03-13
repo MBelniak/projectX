@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,7 +29,7 @@ public class PartiesController {
     }
 
     @RequestMapping("/parties")
-    public List<Party> getParties()
+    public Iterable<Party> getParties()
     {
         userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return partyService.getAll()
@@ -57,7 +55,7 @@ public class PartiesController {
     }
 
     @RequestMapping("/parties/{id}/guests")
-    public Set<User> getGuests(@PathVariable Long id) {
+    public Iterable<User> getGuests(@PathVariable Long id) {
         Party party = partyService.getParty(id);
         if (party.isPriv()) {
             userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -69,6 +67,12 @@ public class PartiesController {
                 return null;
         }
         return party.getInvitedUsers();
+    }
+
+    @RequestMapping("/current_user/organized_parties")
+    public Iterable<Party> getUsersParties() {
+        userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return partyService.getPartiesOrganizedBy(userDetails.getId());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/parties")
