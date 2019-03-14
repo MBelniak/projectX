@@ -59,20 +59,28 @@
         <section class="section">
             <div class="container">
                 <h1 class="title limited" th:text="${party.name}"></h1>
-                <h2 class="subtitle limited" th:text="${party.description}"></h2><br/>
+                <h3 class="subtitle limited" style="white-space: pre-line;" th:text="${party.description}"
+                    id="description"></h3><br/>
                 <h1 class="subtitle">When?</h1>
                 <h2 class="limited" th:text="${party.date} + ' at ' + ${party.time}"></h2><br/>
                 <h1 class="subtitle">Where?</h1>
                 <h2 class="limited" th:text="${party.city} + ', ul. ' + ${party.address}"></h2><br/>
-                <h3 class="limited">Party arranged by <span
-                        th:text="${party.organizer.first_name}+' '+${party.organizer.surname}"></span></h3><br/>
+                <h3 class="limited" th:if="${#authentication.getPrincipal().getUsername()}==${party.organizer.email}">
+                    You are the organizer of the party.</h3><br/>
+                <h3 th:unless="${#authentication.getPrincipal().getUsername()}==${party.organizer.email}"
+                    class="limited">Party arranged by
+                    <span th:text="${party.organizer.first_name}+' '+${party.organizer.surname}"></span></h3><br/>
                 <h3 class="limited">This party is
                     <span th:if="${party.priv}"
                           th:text="private."></span>
                     <span th:unless="${party.priv}"
-                          th:text="public."></span></h3><br/>
-                <button class="button is-primary" id="back">Back</button>
-                <button class="button" id="main_page">Main Page</button>
+                          th:text="public."></span>
+                </h3><br/>
+                <button th:if="${#authentication.getPrincipal().getUsername()}==${party.organizer.email}" class="button"
+                        id="edit_button">Edit
+                </button>
+                <button class="button " id="back">Back</button>
+                <button class="button is-primary" id="main_page">Main Page</button>
             </div>
         </section>
     </section>
