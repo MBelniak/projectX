@@ -111,11 +111,4 @@ public class StartController {
         return "user";
     }
 
-    @RequestMapping("/my_parties")
-    public String getUsersPartyPage(Model model) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("organized_parties", partyService.getPartiesOrganizedBy(userDetails.getId()));
-        model.addAttribute("attended_parties", userService.getUser(userDetails.getId()).getAttended_parties());
-        return "users_parties";
-    }
 }

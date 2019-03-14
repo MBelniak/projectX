@@ -7,4 +7,8 @@ window.onload= function () {
     $("#main_page").click(function () {
         window.location.href = "/";
     });
+    if ($("#edit_button") != undefined)
+        $("#edit_button").click(function () {
+
+        });
 };

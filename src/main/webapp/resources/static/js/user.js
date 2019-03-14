@@ -1,9 +1,9 @@
 window.onload = function () {
     var user_parties;
-    var hideable = $(".hideable");
-    var info = $(".info");
+    var no_edit = $(".no_edit");
+    var edit = $(".edit");
     var warning = $("#warning");
-    hideable.hide();
+    edit.hide();
     var table_body = $('#parties_table');
     $.ajax('/current_user/organized_parties', {}).then(function success(response) {
         user_parties = response;
@@ -12,20 +12,27 @@ window.onload = function () {
         table_body.html("Cannot fetch data from the server");
     });
 
-    $("#back").click(function () {
+    $("#back1").click(function () {
         history.go(-1);
         return false;
     });
-    $('#main').click(function () {
+    $('#main1').click(function () {
         window.location.href = "/";
     });
-    $("#edit").click(function () {
-        hideable.show();
-        info.hide();
+    $("#back2").click(function () {
+        history.go(-1);
+        return false;
+    });
+    $('#main2').click(function () {
+        window.location.href = "/";
+    });
+    $("#edit_button").click(function () {
+        edit.show();
+        no_edit.hide();
     });
     $("#cancel").click(function () {
-        hideable.hide();
-        info.show();
+        edit.hide();
+        no_edit.show();
     });
     $("#save_button").click(function () {
         var requestJSON = prepareJSON();
@@ -37,8 +44,8 @@ window.onload = function () {
             success: function (response) {
                 if (response == "") {
                     updateInfo(requestJSON);
-                    hideable.hide();
-                    info.show();
+                    edit.hide();
+                    no_edit.show();
                     warning.html("Successfully updated profile");
                 }
                 else {
