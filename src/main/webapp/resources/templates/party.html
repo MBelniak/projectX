@@ -10,6 +10,8 @@
     <link rel="stylesheet" th:href="@{/css/party.css}"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
     <script th:src="@{/js/party.js}" type="text/javascript"></script>
+    <script type="text/javascript" th:src="@{/js/cookiesHandler.js}"></script>
+
 
     <title>PARTY TIME!</title>
 </head>
@@ -79,7 +81,7 @@
                 <button th:if="${#authentication.getPrincipal().getUsername()}==${party.organizer.email}" class="button"
                         id="edit_button">Edit
                 </button>
-                <button class="button" id="back">Back</button>
+                <button class="button" id="back">Back to the parties</button>
                 <button class="button is-primary" id="main_page">Main Page</button>
             </div>
         </section>

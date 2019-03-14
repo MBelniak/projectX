@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script type="text/javascript" th:src="@{/js/user.js}"></script>
+    <script type="text/javascript" th:src="@{/js/cookiesHandler.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
     <title>USER DETAILS</title>
 </head>
@@ -52,7 +53,7 @@
             <div class="no_edit">
                 <label class="label">First name:</label>
                 <p id="first_name" th:text="${user.first_name}"></p><br/>
-                <label class="label"><span style="color: #f00; font-size: 12px;">*</span>Surname:</label>
+                <label class="label">Surname:</label>
                 <p id="surname" th:text="${user.surname}"></p><br/>
                 <label class="label">Date of birth:</label>
                 <p id="birth" th:text="${user.date_of_birth}"></p><br/><br/>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/parties.css}"/>
     <script th:src="@{/js/parties.js}" type="text/javascript"></script>
     <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+    <script type="text/javascript" th:src="@{/js/cookiesHandler.js}"></script>
+
     <title>PARTY TIME!</title>
 </head>
 <body>
@@ -52,12 +54,12 @@
         <div class="container">
             <h1 class="title" style="text-align: left; color: #222222">Public parties</h1>
             <table id="public" class="table is-hoverable is-striped is-fullwidth">
-                <tr>
+                <thead>
                 <th id="th_name_pub">Name</th>
                 <th id="th_date_pub">Date, time</th>
                 <th id="th_address_pub">Address</th>
                 <th id="th_invitation_pub">Got the invitation</th>
-                </tr>
+                </thead>
                 <tbody id="table_body_pub">
                 </tbody>
             </table>

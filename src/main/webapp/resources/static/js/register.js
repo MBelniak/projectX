@@ -44,8 +44,10 @@ window.onload=function () {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(requestJSON),
             success: function (response) {
-                if (response == "")
-                    window.location.href='/login?register=ok';
+                if (response == "") {
+                    document.cookie = pushURL(document.cookie, window.location.href);
+                    window.location.href = '/login?register=ok';
+                }
                 else
                 {
                     warning.html("Error: ");
@@ -60,9 +62,18 @@ window.onload=function () {
         })
     });
     $("#back").click(function () {
-        history.go(-1);
-        return false;
+        var href = getURL(document.cookie);
+        document.cookie = eraseLastURL(document.cookie);
+        if (href != null)
+            window.location.href = href;
+        else
+            window.location.href = "/";
     });
+    if ($("#username") != undefined) {
+        $("#username").click(function () {
+            document.cookie = pushURL(document.cookie, window.location.href);
+        });
+    }
 };
 
 function prepareJSON() {
@@ -80,5 +91,6 @@ function prepareJSON() {
     obj.date_of_birth = date.val();
     return obj;
 }
+
 
 

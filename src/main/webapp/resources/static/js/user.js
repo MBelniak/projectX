@@ -12,20 +12,23 @@ window.onload = function () {
         table_body.html("Cannot fetch data from the server");
     });
 
-    $("#back1").click(function () {
-        history.go(-1);
-        return false;
+    $("#back1, #back2").click(function () {
+        var href = getURL(document.cookie);
+        document.cookie = eraseLastURL(document.cookie);
+        if (href != null)
+            window.location.href = href;
+        else
+            window.location.href = "/";
     });
-    $('#main1').click(function () {
+    $('#main1, #main2').click(function () {
+        document.cookie = pushURL(document.cookie, window.location.href);
         window.location.href = "/";
     });
-    $("#back2").click(function () {
-        history.go(-1);
-        return false;
-    });
-    $('#main2').click(function () {
-        window.location.href = "/";
-    });
+    if ($("#username") != undefined) {
+        $("#username").click(function () {
+            document.cookie = pushURL(document.cookie, window.location.href);
+        });
+    }
     $("#edit_button").click(function () {
         edit.show();
         no_edit.hide();
@@ -78,7 +81,14 @@ function updateInfo(userPOJO) {
 }
 
 function showParties(parties, table) {
-    parties.forEach(function (party) {
-        table.append("<tr><td><a href='/search_parties/" + party['id'] + "'>" + party["name"] + "</a></td></tr>");
-    });
+    for (var i = 0; i < parties.length; i++) {
+        table.append("<tr><td><a id='" + i + "' href='/search_parties/" + parties[i]['id'] + "'>" + parties[i]["name"] + "</a></td></tr>");
+        $("#" + i).click(pushToCookie(parties[i]['id']));
+    }
+}
+
+function pushToCookie(id) {
+    return function () {
+        document.cookie = pushURL(document.cookie, "/search_parties/" + id);
+    }
 }

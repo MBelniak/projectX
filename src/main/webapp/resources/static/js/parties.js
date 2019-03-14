@@ -16,7 +16,6 @@ window.onload=function () {
         $.ajax('current_user/id', {}).then(
             function success(id) {
                 current_user_ID = id;
-                console.log(id);
                 addInvitationCheck(publicParties, current_user_ID);
                 showParties(publicParties, table_public);
                 showParties(privateParties, table_private);
@@ -27,15 +26,26 @@ window.onload=function () {
         );
 
     }, function fail() {
-
-
+        $('.table').html("<td>Cannot fetch data from the server</td>");
     });
 
-    $("#main_page").click(function () {window.location.href="/";});
+    $("#main_page").click(function () {
+        document.cookie = pushURL(document.cookie, window.location.href);
+        window.location.href = "/";
+    });
     $("#back").click(function () {
-        history.go(-1);
-        return false;
+        var href = getURL(document.cookie);
+        document.cookie = eraseLastURL(document.cookie);
+        if (href != null)
+            window.location.href = href;
+        else
+            window.location.href = "/";
     });
+    if ($("#username") != undefined) {
+        $("#username").click(function () {
+            document.cookie = pushURL(document.cookie, window.location.href);
+        });
+    }
     $('#th_name_pub').click(function () {
         if (publicParties != null) {
             publicParties.sort(compareByName);
@@ -84,7 +94,7 @@ function showParties(parties, table) {
     table.empty();
     var table_data;
     for (var i = 0; i < parties.length; i++) {
-        table_data = '<tr><td><a href="/search_parties/' + parties[i]["id"] + '">' + parties[i]["name"] + '</a></td><td>' + parties[i]["date"] +
+        table_data = '<tr><td><a id="' + i + '" href="/search_parties/' + parties[i]["id"] + '">' + parties[i]["name"] + '</a></td><td>' + parties[i]["date"] +
             ', ' + parties[i]["time"] + '</td><td>' + parties[i]["city"] + ', ul. ' + parties[i]["address"] + '</td>';
 
         if (!parties[i]["priv"])
@@ -92,10 +102,15 @@ function showParties(parties, table) {
         else
             table_data += '</tr>';
         table.append(table_data);
+        $("#" + i).click(pushToCookie(parties[i]['id']));
     }
 }
 
-
+function pushToCookie(id) {
+    return function () {
+        document.cookie = pushURL(document.cookie, "/search_parties/" + id);
+    }
+}
 function compareByName(party1, party2) {
     return party1["name"].localeCompare(party2["name"]);
 }

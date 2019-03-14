@@ -49,15 +49,23 @@ window.onload=function()
     });
 
     $("#back").click(function () {
-        history.go(-1);
-        return false;
+        var href = getURL(document.cookie);
+        document.cookie = eraseLastURL(document.cookie);
+        if (href != null)
+            window.location.href = href;
+        else
+            window.location.href = "/";
     });
     $(".listened").focusin(function ()
     {
         if($(this).hasClass("is-danger"))
             $(this).removeClass("is-danger");
     });
-
+    if ($("#username") != undefined) {
+        $("#username").click(function () {
+            document.cookie = pushURL(document.cookie, window.location.href);
+        });
+    }
 };
 
 function ajaxPostParty(requestJSON) {
@@ -67,6 +75,7 @@ function ajaxPostParty(requestJSON) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(requestJSON),
             success: function () {
+                document.cookie = pushURL(document.cookie, window.location.href);
                 window.location.href='/party_added';
             },
             error:function (error) {
@@ -136,4 +145,5 @@ function prepareJSON() {
 function setWarn(state) {
     state === true ? this.html("Please fill in all required fields.") : this.html("");
 }
+
 

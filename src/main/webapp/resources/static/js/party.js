@@ -1,8 +1,7 @@
 window.onload= function () {
 
     $("#back").click(function () {
-        history.go(-1);
-        return false;
+        window.location.href = "/search_parties";
     });
     $("#main_page").click(function () {
         window.location.href = "/";
@@ -11,4 +10,9 @@ window.onload= function () {
         $("#edit_button").click(function () {
 
         });
+    if ($("#username") != undefined) {
+        $("#username").click(function () {
+            window.location.href = "/user_details";
+        });
+    }
 };
