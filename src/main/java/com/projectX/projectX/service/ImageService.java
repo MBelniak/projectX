@@ -42,10 +42,6 @@ public class ImageService {
         return imageRepository.findByName(name);
     }
 
-    private void saveImage(Image image)
-    {
-        imageRepository.save(image);
-    }
     public String createImage(MultipartFile file) throws IOException {
         if(!file.isEmpty())
         {
@@ -58,9 +54,9 @@ public class ImageService {
                 return null;
             }
             Image image = new Image("temporaryName");
-            saveImage(image);
+            imageRepository.save(image);
             image.setName("partyImage("+image.getId()+")."+file.getContentType().split("/")[1]);
-            saveImage(image);
+            imageRepository.save(image);
             Files.copy(file.getInputStream(), Paths.get(IMAGE_DIR_ROOT, image.getName()), StandardCopyOption.REPLACE_EXISTING);
             return image.getName();
         }

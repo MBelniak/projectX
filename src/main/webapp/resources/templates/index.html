@@ -61,7 +61,7 @@
         </div>
         <div th:if="${#authorization.expression('!isAuthenticated()')}">
             <form action="/login">
-                <input type="submit" class="button is-primary" value="Sign in"/>
+                <input type="submit" class="button is-primary" value="Sign in" style="margin-bottom: 10px"/>
             </form>
             <form action="/register">
                 <input type="submit" class="button" value="Sign up"/>

@@ -1,10 +1,10 @@
-package com.projectX.projectX.Controllers;
+package com.projectX.projectX.controllers;
 
 import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.domain.User;
 import com.projectX.projectX.pojos.PartyPOJO;
 import com.projectX.projectX.service.ImageService;
-import com.projectX.projectX.service.PartyServiceImpl;
+import com.projectX.projectX.service.PartyService;
 import com.projectX.projectX.service.UserDetailsImpl;
 import com.projectX.projectX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 @RestController
 public class PartiesController {
 
-    private final PartyServiceImpl partyService;
+    private final PartyService partyService;
     private final ImageService imageService;
     private final UserService userService;
     private UserDetailsImpl userDetails;
 
     @Autowired
-    public PartiesController(PartyServiceImpl partyService, ImageService imageService, UserService userService) {
+    public PartiesController(PartyService partyService, ImageService imageService, UserService userService) {
         this.partyService = partyService;
         this.imageService = imageService;
         this.userService = userService;
@@ -86,10 +86,10 @@ public class PartiesController {
         partyService.saveParty(party);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/parties/{id}")
-    public void updateParty(@RequestBody Party party, @PathVariable Long id)
+    @RequestMapping(method = RequestMethod.PUT, value = "/parties")
+    public void updateParty(@RequestBody Party party)
     {
-        partyService.updateParty(party, id);
+        partyService.updateParty(party);
     }
 
 

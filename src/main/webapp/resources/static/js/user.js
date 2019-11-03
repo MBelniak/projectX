@@ -52,7 +52,7 @@ window.onload = function () {
                     warning.html("Successfully updated profile");
                 }
                 else {
-                    warning.html("Error: ");
+                    warning.html("Error(s): ");
                     for (var i = 0; i < response.length; i++)
                         warning.append("<p>" + response[i] + "</p>");
                 }

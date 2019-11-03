@@ -16,7 +16,7 @@ public class CustomUserSerializer extends StdSerializer<User> {
         this(null);
     }
 
-    public CustomUserSerializer(Class<User> t) {
+    CustomUserSerializer(Class<User> t) {
         super(t);
     }
 

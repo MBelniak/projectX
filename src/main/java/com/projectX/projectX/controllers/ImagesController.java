@@ -1,4 +1,4 @@
-package com.projectX.projectX.Controllers;
+package com.projectX.projectX.controllers;
 
 import com.projectX.projectX.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,7 @@ package com.projectX.projectX.pojos;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Validated
 public class UserPOJO {
     @NotNull(message = "Please fill in 'first name' field.")
     @Pattern(regexp = "[\\p{L}]+$", message = "First name must only match literals")

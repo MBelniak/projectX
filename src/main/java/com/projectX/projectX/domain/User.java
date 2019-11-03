@@ -31,7 +31,7 @@ public class User implements Serializable {
     @Email(message = "Email is invalid")
     private String email;
     @NotNull(message = "Please fill in 'password' field.")
-    @Length(min = 8, message = "Password has to be at least 8 char. long.")
+    @Length(min = 8, message = "Password has to be at least 8 characters long.")
     private String hash_password;
     @NotNull(message = "Please fill in 'first name' field.")
     @Pattern(regexp = "[\\p{L}]+$", message = "First name must only match literals")
@@ -46,6 +46,7 @@ public class User implements Serializable {
     private Role role;
     @ManyToMany(mappedBy = "invitedUsers")
     private Set<Party> attended_parties;
+
 
     public User() {
     }

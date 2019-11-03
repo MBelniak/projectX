@@ -1,4 +1,4 @@
-package com.projectX.projectX.Controllers;
+package com.projectX.projectX.controllers;
 
 import com.projectX.projectX.domain.Party;
 import com.projectX.projectX.service.PartyService;

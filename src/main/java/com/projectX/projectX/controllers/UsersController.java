@@ -1,4 +1,4 @@
-package com.projectX.projectX.Controllers;
+package com.projectX.projectX.controllers;
 
 import com.projectX.projectX.domain.User;
 import com.projectX.projectX.pojos.UserPOJO;
